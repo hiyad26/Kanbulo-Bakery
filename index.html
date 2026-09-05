@@ -1,8 +1,11 @@
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#8b4513">
+  <meta name="theme-color" content="#8b4513">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,306 +16,274 @@
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #fff8ef;
-      color: #3b2416;
+      background: #f8f4ef;
+      color: #333;
     }
 
     header {
-      background: linear-gradient(135deg, #7b351b, #b95b2b);
+      background: #8b4513;
       color: white;
-      padding: 28px 18px;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,.15);
+      padding: 25px 15px;
     }
 
     header h1 {
-      font-size: 32px;
-      margin-bottom: 6px;
+      margin: 0;
+      font-size: 30px;
     }
 
     header p {
-      opacity: .9;
+      margin: 8px 0 0;
       font-size: 15px;
     }
 
     .container {
       max-width: 1100px;
       margin: auto;
-      padding: 18px;
+      padding: 20px;
     }
 
-    .admin-box {
+    .admin-login,
+    .admin-panel {
       background: white;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(80,40,10,.08);
-    }
-
-    .admin-box h2 {
-      margin-bottom: 15px;
-      font-size: 20px;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 13px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 15px;
-      background: #fff;
-    }
-
-    textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: #a94d25;
-    }
-
-    .preview {
-      width: 100%;
-      max-height: 220px;
-      object-fit: cover;
+      padding: 20px;
       border-radius: 12px;
-      margin: 5px 0 12px;
-      display: none;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
 
-    .buttons {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+    .admin-login h2,
+    .admin-panel h2 {
+      margin-top: 0;
+      color: #8b4513;
+    }
+
+    .admin-login input,
+    .admin-panel input,
+    .admin-panel textarea,
+    .admin-panel select {
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .admin-panel textarea {
+      min-height: 90px;
+      resize: vertical;
     }
 
     button {
       border: none;
-      padding: 11px 15px;
-      border-radius: 10px;
+      border-radius: 8px;
+      padding: 10px 15px;
       cursor: pointer;
-      font-weight: bold;
       font-size: 14px;
     }
 
-    .primary {
-      background: #8d3f20;
+    .login-btn,
+    .save-btn {
+      background: #8b4513;
       color: white;
     }
 
-    .primary:hover {
-      background: #6f2e16;
+    .logout-btn {
+      background: #555;
+      color: white;
     }
 
-    .secondary {
-      background: #eee;
+    .cancel-btn {
+      background: #ddd;
       color: #333;
     }
 
-    .danger {
-      background: #d9534f;
-      color: white;
+    .login-btn:hover,
+    .save-btn:hover {
+      background: #6f350f;
     }
 
-    .success {
-      background: #4b8b3b;
-      color: white;
+    .logout-btn:hover {
+      background: #333;
     }
 
-    .top-tools {
-      display: flex;
-      gap: 10px;
+    .message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .admin-status {
+      background: #f3eee8;
+      padding: 12px;
+      border-radius: 8px;
       margin-bottom: 15px;
-      flex-wrap: wrap;
     }
 
-    .search {
-      flex: 1;
-      min-width: 200px;
-      margin: 0;
+    .search-box {
+      margin-bottom: 15px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
     }
 
     .categories {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
       margin-bottom: 20px;
     }
 
     .category-btn {
-      white-space: nowrap;
       background: white;
-      border: 1px solid #e2d3c5;
-      color: #63331d;
-      padding: 10px 16px;
-      border-radius: 25px;
+      color: #8b4513;
+      border: 1px solid #8b4513;
     }
 
-    .category-btn.active {
-      background: #8d3f20;
+    .category-btn.active,
+    .category-btn:hover {
+      background: #8b4513;
       color: white;
-      border-color: #8d3f20;
     }
 
-    .section-title {
-      font-size: 22px;
-      margin-bottom: 15px;
-    }
-
-    .products {
+    #products {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
     }
 
-    .card {
+    .product-card {
       background: white;
-      border-radius: 18px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 5px 18px rgba(70,35,10,.09);
-      transition: transform .2s;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
 
-    .card:hover {
-      transform: translateY(-3px);
-    }
-
-    .product-image {
+    .product-card img {
       width: 100%;
-      height: 190px;
+      height: 180px;
       object-fit: cover;
-      background: #f1dfcc;
+      display: block;
     }
 
-    .card-content {
+    .product-content {
       padding: 15px;
     }
 
-    .card h3 {
-      font-size: 19px;
-      margin-bottom: 5px;
+    .product-content h3 {
+      margin: 0 0 8px;
+      color: #8b4513;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 8px;
     }
 
     .category-label {
       display: inline-block;
-      background: #f5e2d2;
-      color: #85401f;
-      padding: 5px 9px;
-      border-radius: 15px;
+      background: #f1e5d8;
+      color: #8b4513;
+      padding: 4px 8px;
+      border-radius: 20px;
       font-size: 12px;
-      margin-bottom: 9px;
+      margin-bottom: 8px;
     }
 
     .description {
-      color: #777;
       font-size: 14px;
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-
-    .price {
-      font-size: 20px;
-      font-weight: bold;
-      color: #9a451f;
+      color: #666;
       margin-bottom: 10px;
     }
 
     .availability {
-      font-size: 13px;
-      margin-bottom: 12px;
       font-weight: bold;
+      margin-bottom: 12px;
     }
 
     .available {
-      color: #438336;
+      color: green;
     }
 
     .unavailable {
-      color: #c43c35;
+      color: #c00;
     }
 
     .card-buttons {
       display: flex;
-      gap: 6px;
       flex-wrap: wrap;
+      gap: 7px;
     }
 
-    .card-buttons button {
-      flex: 1;
-      min-width: 70px;
-      padding: 9px 8px;
-      font-size: 12px;
+    .edit-btn {
+      background: #1976d2;
+      color: white;
     }
 
-    .empty {
-      text-align: center;
-      padding: 40px 20px;
-      color: #777;
+    .hide-btn {
+      background: #e69b00;
+      color: white;
+    }
+
+    .delete-btn {
+      background: #c62828;
+      color: white;
+    }
+
+    .preview {
+      max-width: 180px;
+      max-height: 130px;
+      margin: 5px 0 12px;
+      border-radius: 8px;
+      display: none;
     }
 
     footer {
       text-align: center;
-      padding: 30px 15px;
-      color: #8b7567;
-      font-size: 13px;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 30px;
+      padding: 25px;
+      color: #777;
+      font-size: 14px;
     }
 
     @media (max-width: 600px) {
       header h1 {
-        font-size: 27px;
+        font-size: 25px;
       }
 
       .container {
         padding: 12px;
       }
 
-      .products {
+      #products {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 12px;
       }
 
-      .product-image {
-        height: 145px;
+      .product-card img {
+        height: 140px;
       }
 
-      .card-content {
-        padding: 11px;
-      }
-
-      .card h3 {
-        font-size: 16px;
-      }
-
-      .price {
-        font-size: 17px;
-      }
-
-      .description {
-        font-size: 12px;
+      .product-content {
+        padding: 10px;
       }
 
       .card-buttons button {
-        font-size: 11px;
-        padding: 8px 5px;
+        width: 100%;
       }
     }
   </style>
@@ -327,98 +298,160 @@
 
 <div class="container">
 
-  <!-- ADMIN -->
-  <div class="admin-box">
-    <h2 id="formTitle">➕ Add New Product</h2>
+  <!-- ADMIN LOGIN -->
+  <div id="adminLoginBox" class="admin-login">
+    <h2>🔐 Admin Login</h2>
 
-    <input id="productName" type="text" placeholder="Product name">
+    <input
+      type="email"
+      id="adminEmail"
+      placeholder="Admin email"
+      autocomplete="username"
+    >
 
-    <input id="productPrice" type="number" step="0.01" placeholder="Price in MVR">
+    <input
+      type="password"
+      id="adminPassword"
+      placeholder="Admin password"
+      autocomplete="current-password"
+    >
+
+    <button class="login-btn" onclick="loginAdmin()">
+      Login as Admin
+    </button>
+
+    <div id="loginMessage" class="message"></div>
+  </div>
+
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" class="admin-panel hidden">
+
+    <h2>⚙️ Bakery Admin</h2>
+
+    <div class="admin-status">
+      ✅ You are logged in as the bakery administrator.
+    </div>
+
+    <button class="logout-btn" onclick="logoutAdmin()">
+      Logout
+    </button>
+
+    <hr>
+
+    <h3 id="formTitle">➕ Add Product</h3>
+
+    <input
+      type="text"
+      id="productName"
+      placeholder="Product name"
+    >
+
+    <input
+      type="number"
+      id="productPrice"
+      placeholder="Price (MVR)"
+      step="0.01"
+    >
 
     <select id="productCategory">
-      <option value="">Select category</option>
-      <option value="Bakery">🥖 Bakery</option>
-      <option value="Cakes">🍰 Cakes</option>
-      <option value="Sweets">🍬 Sweets</option>
-      <option value="Other">🍽️ Other</option>
+      <option value="Bakery">Bakery</option>
+      <option value="Cakes">Cakes</option>
+      <option value="Sweets">Sweets</option>
+      <option value="Other">Other</option>
     </select>
 
-    <textarea id="productDescription"
-      placeholder="Description (optional)"></textarea>
+    <textarea
+      id="productDescription"
+      placeholder="Product description"
+    ></textarea>
 
-    <input id="productImage"
+    <input
       type="file"
+      id="productImage"
       accept="image/*"
-      onchange="previewImage(event)">
+      onchange="previewImage(event)"
+    >
 
     <img id="imagePreview" class="preview">
 
-    <div class="buttons">
-      <button class="primary" onclick="saveProduct()">
-        💾 Save Product
-      </button>
+    <br>
 
-      <button id="cancelBtn"
-        class="secondary"
-        onclick="cancelEdit()"
-        style="display:none;">
-        Cancel
-      </button>
-    </div>
+    <button class="save-btn" onclick="saveProduct()">
+      💾 Save Product
+    </button>
 
-    <p id="message" style="margin-top:10px;"></p>
+    <button
+      class="cancel-btn"
+      onclick="cancelEdit()"
+      id="cancelButton"
+      style="display:none;"
+    >
+      Cancel
+    </button>
+
+    <div id="message" class="message"></div>
+
   </div>
 
 
   <!-- SEARCH -->
-  <div class="top-tools">
+  <div class="search-box">
     <input
-      id="search"
-      class="search"
       type="text"
-      placeholder="🔎 Search bakery items..."
-      oninput="filterProducts()">
+      id="search"
+      placeholder="🔍 Search products..."
+      oninput="filterProducts()"
+    >
   </div>
 
 
   <!-- CATEGORIES -->
   <div class="categories">
 
-    <button class="category-btn active"
-      onclick="selectCategory('All', this)">
+    <button
+      class="category-btn active"
+      onclick="selectCategory('All', this)"
+    >
       All
     </button>
 
-    <button class="category-btn"
-      onclick="selectCategory('Bakery', this)">
-      🥖 Bakery
+    <button
+      class="category-btn"
+      onclick="selectCategory('Bakery', this)"
+    >
+      Bakery
     </button>
 
-    <button class="category-btn"
-      onclick="selectCategory('Cakes', this)">
-      🍰 Cakes
+    <button
+      class="category-btn"
+      onclick="selectCategory('Cakes', this)"
+    >
+      Cakes
     </button>
 
-    <button class="category-btn"
-      onclick="selectCategory('Sweets', this)">
-      🍬 Sweets
+    <button
+      class="category-btn"
+      onclick="selectCategory('Sweets', this)"
+    >
+      Sweets
     </button>
 
-    <button class="category-btn"
-      onclick="selectCategory('Other', this)">
-      🍽️ Other
+    <button
+      class="category-btn"
+      onclick="selectCategory('Other', this)"
+    >
+      Other
     </button>
 
   </div>
 
 
-  <h2 class="section-title">Our Products</h2>
-
-  <div id="products" class="products">
-    <div class="loading">Loading products... 🥖</div>
-  </div>
+  <!-- PRODUCTS -->
+  <div id="products"></div>
 
 </div>
+
 
 <footer>
   © 2026 Kanbulo Bakery
@@ -427,9 +460,9 @@
 
 <script>
 
-  // ==============================
-  // SUPABASE
-  // ==============================
+  /* ================================
+     SUPABASE
+  ================================= */
 
   const SUPABASE_URL =
     "https://kyrkcfytfptlwzyemwlw.supabase.co";
@@ -444,54 +477,209 @@
     );
 
 
-  // ==============================
-  // VARIABLES
-  // ==============================
+  /* ================================
+     ADMIN SETTINGS
+  ================================= */
+
+  const ADMIN_USER_ID =
+    "fa350331-2645-4ca3-b16a-11819fe7d5f5";
+
+  let isAdmin = false;
+  let currentUser = null;
 
   let products = [];
-
   let editingId = null;
-
   let selectedCategory = "All";
-
   let selectedImageFile = null;
 
 
-  // ==============================
-  // LOAD PRODUCTS
-  // ==============================
+  /* ================================
+     AUTH INITIALIZATION
+  ================================= */
+
+  async function initAuth() {
+
+    const {
+      data: { session }
+    } = await supabaseClient.auth.getSession();
+
+    setAdminUI(session ? session.user : null);
+
+
+    supabaseClient.auth.onAuthStateChange(
+      (event, session) => {
+
+        setAdminUI(
+          session ? session.user : null
+        );
+
+      }
+    );
+  }
+
+
+  /* ================================
+     ADMIN UI
+  ================================= */
+
+  function setAdminUI(user) {
+
+    currentUser = user;
+
+    isAdmin =
+      !!user &&
+      user.id === ADMIN_USER_ID;
+
+    const loginBox =
+      document.getElementById("adminLoginBox");
+
+    const adminPanel =
+      document.getElementById("adminPanel");
+
+
+    if (isAdmin) {
+
+      loginBox.classList.add("hidden");
+      adminPanel.classList.remove("hidden");
+
+    } else {
+
+      loginBox.classList.remove("hidden");
+      adminPanel.classList.add("hidden");
+
+    }
+
+
+    displayProducts();
+  }
+
+
+  /* ================================
+     ADMIN LOGIN
+  ================================= */
+
+  async function loginAdmin() {
+
+    const email =
+      document.getElementById("adminEmail").value.trim();
+
+    const password =
+      document.getElementById("adminPassword").value;
+
+    const message =
+      document.getElementById("loginMessage");
+
+
+    if (!email || !password) {
+
+      message.style.color = "red";
+      message.textContent =
+        "Please enter your email and password.";
+
+      return;
+    }
+
+
+    message.style.color = "#8b4513";
+    message.textContent = "Logging in...";
+
+
+    const {
+      data,
+      error
+    } = await supabaseClient.auth.signInWithPassword({
+
+      email: email,
+      password: password
+
+    });
+
+
+    if (error) {
+
+      message.style.color = "red";
+      message.textContent =
+        "Login failed: " + error.message;
+
+      return;
+    }
+
+
+    if (
+      !data.user ||
+      data.user.id !== ADMIN_USER_ID
+    ) {
+
+      await supabaseClient.auth.signOut();
+
+      message.style.color = "red";
+      message.textContent =
+        "This account is not authorized as bakery admin.";
+
+      return;
+    }
+
+
+    document.getElementById("adminPassword").value = "";
+
+    message.style.color = "green";
+    message.textContent =
+      "Login successful!";
+
+  }
+
+
+  /* ================================
+     LOGOUT
+  ================================= */
+
+  async function logoutAdmin() {
+
+    await supabaseClient.auth.signOut();
+
+    cancelEdit();
+
+  }
+
+
+  /* ================================
+     LOAD PRODUCTS
+  ================================= */
 
   async function loadProducts() {
 
-    const { data, error } =
-      await supabaseClient
-        .from("products")
-        .select("*")
-        .order("created_at", {
-          ascending: false
-        });
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("products")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      });
+
 
     if (error) {
 
       console.error(error);
 
       document.getElementById("products").innerHTML =
-        `<div class="empty">
-          ❌ Could not load products.
-        </div>`;
+        "<p>Unable to load products.</p>";
 
       return;
     }
 
+
     products = data || [];
 
     displayProducts();
+
   }
 
 
-  // ==============================
-  // DISPLAY PRODUCTS
-  // ==============================
+  /* ================================
+     DISPLAY PRODUCTS
+  ================================= */
 
   function displayProducts() {
 
@@ -499,34 +687,38 @@
       document.getElementById("products");
 
     const search =
-      document.getElementById("search")
+      document
+        .getElementById("search")
         .value
-        .toLowerCase()
-        .trim();
+        .toLowerCase();
 
-    let filtered = products.filter(product => {
 
-      const matchesSearch =
-        product.name.toLowerCase().includes(search) ||
-        (product.description || "")
-          .toLowerCase()
-          .includes(search);
+    let filtered =
+      products.filter(product => {
 
-      const matchesCategory =
-        selectedCategory === "All" ||
-        product.category === selectedCategory;
+        const matchesSearch =
+          product.name
+            .toLowerCase()
+            .includes(search);
 
-      return matchesSearch && matchesCategory;
-    });
+
+        const matchesCategory =
+          selectedCategory === "All" ||
+          product.category === selectedCategory;
+
+
+        return (
+          matchesSearch &&
+          matchesCategory
+        );
+
+      });
 
 
     if (filtered.length === 0) {
 
       container.innerHTML =
-        `<div class="empty">
-          <h3>🥐 No products found</h3>
-          <p>Try another search or category.</p>
-        </div>`;
+        "<p>No products found.</p>";
 
       return;
     }
@@ -540,22 +732,62 @@
           "https://via.placeholder.com/500x350?text=Kanbulo+Bakery";
 
 
-        const price =
-          Number(product.price || 0)
-            .toFixed(2);
+        const availability =
+          product.available !== false;
+
+
+        let adminButtons = "";
+
+
+        /*
+          IMPORTANT:
+          Customers do NOT see these buttons.
+        */
+
+        if (isAdmin) {
+
+          adminButtons = `
+            <div class="card-buttons">
+
+              <button
+                class="edit-btn"
+                onclick="editProduct(${product.id})"
+              >
+                ✏️ Edit
+              </button>
+
+              <button
+                class="hide-btn"
+                onclick="toggleAvailability(
+                  ${product.id},
+                  ${availability}
+                )"
+              >
+                ${availability ? "🙈 Hide" : "👁️ Show"}
+              </button>
+
+              <button
+                class="delete-btn"
+                onclick="deleteProduct(${product.id})"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+          `;
+
+        }
 
 
         return `
-          <div class="card">
+          <div class="product-card">
 
             <img
-              class="product-image"
               src="${escapeHtml(image)}"
               alt="${escapeHtml(product.name)}"
-              onerror="this.src='https://via.placeholder.com/500x350?text=Kanbulo+Bakery'"
             >
 
-            <div class="card-content">
+            <div class="product-content">
 
               <span class="category-label">
                 ${escapeHtml(product.category || "Other")}
@@ -566,65 +798,28 @@
               </h3>
 
               <div class="price">
-                MVR ${price}
+                MVR ${Number(product.price).toFixed(2)}
               </div>
 
-              ${
-                product.description
-                ? `<div class="description">
-                    ${escapeHtml(product.description)}
-                   </div>`
-                : ""
-              }
+              <div class="description">
+                ${escapeHtml(product.description || "")}
+              </div>
 
               <div class="availability ${
-                product.available
+                availability
                   ? "available"
                   : "unavailable"
               }">
 
                 ${
-                  product.available
-                  ? "✓ Available"
-                  : "✕ Unavailable"
+                  availability
+                    ? "✅ Available"
+                    : "❌ Currently unavailable"
                 }
 
               </div>
 
-              <div class="card-buttons">
-
-                <button
-                  class="primary"
-                  onclick="editProduct(${product.id})">
-                  ✏️ Edit
-                </button>
-
-                <button
-                  class="${
-                    product.available
-                    ? "secondary"
-                    : "success"
-                  }"
-                  onclick="toggleAvailability(
-                    ${product.id},
-                    ${product.available}
-                  )">
-
-                  ${
-                    product.available
-                    ? "Hide"
-                    : "Show"
-                  }
-
-                </button>
-
-                <button
-                  class="danger"
-                  onclick="deleteProduct(${product.id})">
-                  🗑️
-                </button>
-
-              </div>
+              ${adminButtons}
 
             </div>
 
@@ -632,117 +827,148 @@
         `;
 
       }).join("");
+
   }
 
 
-  // ==============================
-  // SEARCH
-  // ==============================
+  /* ================================
+     SEARCH
+  ================================= */
 
   function filterProducts() {
+
     displayProducts();
+
   }
 
 
-  // ==============================
-  // CATEGORY
-  // ==============================
+  /* ================================
+     CATEGORY
+  ================================= */
 
   function selectCategory(category, button) {
 
     selectedCategory = category;
 
+
     document
       .querySelectorAll(".category-btn")
-      .forEach(btn =>
-        btn.classList.remove("active")
-      );
+      .forEach(btn => {
+
+        btn.classList.remove("active");
+
+      });
+
 
     button.classList.add("active");
 
     displayProducts();
+
   }
 
 
-  // ==============================
-  // IMAGE PREVIEW
-  // ==============================
+  /* ================================
+     IMAGE PREVIEW
+  ================================= */
 
   function previewImage(event) {
 
-    const file =
-      event.target.files[0];
+    selectedImageFile =
+      event.target.files[0] || null;
 
-    if (!file) return;
-
-    selectedImageFile = file;
 
     const preview =
       document.getElementById("imagePreview");
 
-    preview.src =
-      URL.createObjectURL(file);
 
-    preview.style.display = "block";
+    if (selectedImageFile) {
+
+      preview.src =
+        URL.createObjectURL(
+          selectedImageFile
+        );
+
+      preview.style.display =
+        "block";
+
+    } else {
+
+      preview.src = "";
+      preview.style.display =
+        "none";
+
+    }
+
   }
 
 
-  // ==============================
-  // SAVE PRODUCT
-  // ==============================
+  /* ================================
+     SAVE PRODUCT
+  ================================= */
 
   async function saveProduct() {
 
+    if (!isAdmin) {
+
+      alert("Admin login required.");
+
+      return;
+    }
+
+
     const name =
-      document.getElementById("productName")
+      document
+        .getElementById("productName")
         .value
         .trim();
+
 
     const price =
-      document.getElementById("productPrice")
+      document
+        .getElementById("productPrice")
         .value;
+
 
     const category =
-      document.getElementById("productCategory")
+      document
+        .getElementById("productCategory")
         .value;
 
+
     const description =
-      document.getElementById("productDescription")
+      document
+        .getElementById("productDescription")
         .value
         .trim();
-
-
-    if (!name) {
-      alert("Please enter a product name.");
-      return;
-    }
-
-    if (price === "") {
-      alert("Please enter a price.");
-      return;
-    }
 
 
     const message =
       document.getElementById("message");
 
-    message.innerText =
-      "Saving...";
+
+    if (!name || !price) {
+
+      message.style.color = "red";
+      message.textContent =
+        "Please enter product name and price.";
+
+      return;
+    }
+
+
+    message.style.color = "#8b4513";
+    message.textContent =
+      "Saving product...";
 
 
     let imageUrl = null;
 
 
-    // ==============================
-    // UPLOAD IMAGE
-    // ==============================
+    /*
+      Upload new image if selected.
+    */
 
     if (selectedImageFile) {
-
-      const extension =
-        selectedImageFile.name
-          .split(".")
-          .pop();
 
       const fileName =
         Date.now() +
@@ -750,11 +976,13 @@
         Math.random()
           .toString(36)
           .substring(2) +
-        "." +
-        extension;
+        "-" +
+        selectedImageFile.name;
 
 
-      const { error: uploadError } =
+      const {
+        error: uploadError
+      } =
         await supabaseClient.storage
           .from("product-images")
           .upload(
@@ -767,49 +995,56 @@
 
         console.error(uploadError);
 
-        message.innerText =
-          "❌ Image upload failed.";
+        message.style.color = "red";
+        message.textContent =
+          "Image upload failed: " +
+          uploadError.message;
 
         return;
       }
 
 
-      const { data } =
+      const {
+        data: publicUrlData
+      } =
         supabaseClient.storage
           .from("product-images")
           .getPublicUrl(fileName);
 
 
       imageUrl =
-        data.publicUrl;
+        publicUrlData.publicUrl;
+
     }
 
 
-    // ==============================
-    // EDIT
-    // ==============================
+    /*
+      EDIT EXISTING PRODUCT
+    */
 
-    if (editingId) {
+    if (editingId !== null) {
 
       const updateData = {
 
         name: name,
-
         price: Number(price),
-
         category: category,
-
         description: description
 
       };
 
 
       if (imageUrl) {
-        updateData.image_url = imageUrl;
+
+        updateData.image_url =
+          imageUrl;
+
       }
 
 
-      const { error } =
+      const {
+        error
+      } =
         await supabaseClient
           .from("products")
           .update(updateData)
@@ -820,43 +1055,40 @@
 
         console.error(error);
 
-        message.innerText =
-          "❌ Could not update product.";
+        message.style.color = "red";
+        message.textContent =
+          "Update failed: " +
+          error.message;
 
         return;
       }
 
 
-      message.innerText =
-        "✅ Product updated!";
+      message.style.color = "green";
+      message.textContent =
+        "Product updated successfully!";
 
     }
 
 
-    // ==============================
-    // NEW PRODUCT
-    // ==============================
+    /*
+      ADD NEW PRODUCT
+    */
 
     else {
 
-      const { error } =
+      const {
+        error
+      } =
         await supabaseClient
           .from("products")
           .insert({
 
             name: name,
-
             price: Number(price),
-
-            category:
-              category || "Other",
-
-            description:
-              description,
-
-            image_url:
-              imageUrl,
-
+            category: category || "Other",
+            description: description,
+            image_url: imageUrl,
             available: true
 
           });
@@ -866,51 +1098,66 @@
 
         console.error(error);
 
-        message.innerText =
-          "❌ Could not save product.";
+        message.style.color = "red";
+        message.textContent =
+          "Product could not be added: " +
+          error.message;
 
         return;
       }
 
 
-      message.innerText =
-        "✅ Product added!";
+      message.style.color = "green";
+      message.textContent =
+        "Product added successfully!";
+
     }
 
 
     resetForm();
 
     await loadProducts();
+
   }
 
 
-  // ==============================
-  // EDIT PRODUCT
-  // ==============================
+  /* ================================
+     EDIT PRODUCT
+  ================================= */
 
   function editProduct(id) {
 
+    if (!isAdmin) {
+
+      alert("Admin login required.");
+
+      return;
+    }
+
+
     const product =
       products.find(p => p.id === id);
+
 
     if (!product) return;
 
 
     editingId = id;
 
+
     document.getElementById("formTitle")
-      .innerText =
+      .textContent =
       "✏️ Edit Product";
 
 
     document.getElementById("productName")
       .value =
-      product.name;
+      product.name || "";
 
 
     document.getElementById("productPrice")
       .value =
-      product.price;
+      product.price || "";
 
 
     document.getElementById("productCategory")
@@ -923,7 +1170,7 @@
       product.description || "";
 
 
-    document.getElementById("cancelBtn")
+    document.getElementById("cancelButton")
       .style.display =
       "inline-block";
 
@@ -932,33 +1179,18 @@
       top: 0,
       behavior: "smooth"
     });
-  }
-
-
-  // ==============================
-  // CANCEL EDIT
-  // ==============================
-
-  function cancelEdit() {
-
-    resetForm();
 
   }
 
 
-  // ==============================
-  // RESET FORM
-  // ==============================
+  /* ================================
+     RESET FORM
+  ================================= */
 
   function resetForm() {
 
     editingId = null;
-
     selectedImageFile = null;
-
-    document.getElementById("formTitle")
-      .innerText =
-      "➕ Add New Product";
 
 
     document.getElementById("productName")
@@ -970,7 +1202,7 @@
 
 
     document.getElementById("productCategory")
-      .value = "";
+      .value = "Bakery";
 
 
     document.getElementById("productDescription")
@@ -981,68 +1213,110 @@
       .value = "";
 
 
-    document.getElementById("imagePreview")
+    const preview =
+      document.getElementById("imagePreview");
+
+
+    preview.src = "";
+    preview.style.display = "none";
+
+
+    document.getElementById("formTitle")
+      .textContent =
+      "➕ Add Product";
+
+
+    document.getElementById("cancelButton")
       .style.display =
       "none";
 
-
-    document.getElementById("cancelBtn")
-      .style.display =
-      "none";
   }
 
 
-  // ==============================
-  // AVAILABILITY
-  // ==============================
+  /* ================================
+     CANCEL EDIT
+  ================================= */
 
-  async function toggleAvailability(id, current) {
+  function cancelEdit() {
 
-    const { error } =
+    resetForm();
+
+    document.getElementById("message")
+      .textContent = "";
+
+  }
+
+
+  /* ================================
+     HIDE / SHOW PRODUCT
+  ================================= */
+
+  async function toggleAvailability(
+    id,
+    currentAvailability
+  ) {
+
+    if (!isAdmin) {
+
+      alert("Admin login required.");
+
+      return;
+    }
+
+
+    const {
+      error
+    } =
       await supabaseClient
         .from("products")
         .update({
-          available: !current
+          available: !currentAvailability
         })
         .eq("id", id);
 
 
     if (error) {
 
-      alert("Could not change availability.");
-
-      console.error(error);
+      alert(
+        "Could not change availability: " +
+        error.message
+      );
 
       return;
     }
 
 
-    loadProducts();
+    await loadProducts();
+
   }
 
 
-  // ==============================
-  // DELETE
-  // ==============================
+  /* ================================
+     DELETE PRODUCT
+  ================================= */
 
   async function deleteProduct(id) {
 
-    const product =
-      products.find(p => p.id === id);
+    if (!isAdmin) {
 
-    if (!product) return;
+      alert("Admin login required.");
+
+      return;
+    }
 
 
-    const confirmDelete =
+    const confirmed =
       confirm(
-        `Delete "${product.name}"?`
+        "Are you sure you want to delete this product?"
       );
 
 
-    if (!confirmDelete) return;
+    if (!confirmed) return;
 
 
-    const { error } =
+    const {
+      error
+    } =
       await supabaseClient
         .from("products")
         .delete()
@@ -1051,21 +1325,23 @@
 
     if (error) {
 
-      alert("Could not delete product.");
-
-      console.error(error);
+      alert(
+        "Could not delete product: " +
+        error.message
+      );
 
       return;
     }
 
 
-    loadProducts();
+    await loadProducts();
+
   }
 
 
-  // ==============================
-  // SECURITY
-  // ==============================
+  /* ================================
+     HTML SECURITY
+  ================================= */
 
   function escapeHtml(value) {
 
@@ -1075,20 +1351,47 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+
   }
 
 
-  // ==============================
-  // START
-  // ==============================
+  /* ================================
+     START WEBSITE
+  ================================= */
+
+  initAuth();
 
   loadProducts();
 
 </script>
 
-</body> <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js");
-}
+
+<script>
+
+  if ("serviceWorker" in navigator) {
+
+    window.addEventListener(
+      "load",
+      () => {
+
+        navigator.serviceWorker
+          .register("./sw.js")
+          .catch(error => {
+
+            console.log(
+              "Service worker registration failed:",
+              error
+            );
+
+          });
+
+      }
+    );
+
+  }
+
 </script>
+
+</body>
 </html>
+```
