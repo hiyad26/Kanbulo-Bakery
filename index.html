@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#8b4513">
+  <meta name="theme-color" content="#6b1f2b">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,189 +16,476 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --maroon: #6b1f2b;
+      --dark-maroon: #4b131d;
+      --cream: #fffaf5;
+      --light-cream: #f8eee7;
+      --gold: #c49a6c;
+      --text: #332c2b;
+      --muted: #827775;
+      --white: #ffffff;
+      --green: #25d366;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--cream);
+      color: var(--text);
+    }
+
+    button,
+    input,
+    select,
+    textarea {
       font-family: Arial, sans-serif;
-      background: #fff8f3;
-      color: #333;
-    }
-
-    header {
-      background: #8b4513;
-      color: white;
-      padding: 18px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    header h1 {
-      margin: 0 0 12px;
-      font-size: 26px;
-    }
-
-    .header-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
     }
 
     button {
-      border: none;
-      border-radius: 8px;
-      padding: 10px 15px;
       cursor: pointer;
-      font-weight: bold;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      background: var(--maroon);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.12);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 17px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .brand-text span {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      opacity: 0.75;
+      margin-top: 3px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+
+    .header-btn {
+      border: 1px solid rgba(255,255,255,0.3);
+      background: transparent;
+      color: white;
+      border-radius: 25px;
+      padding: 9px 14px;
+      font-size: 13px;
+    }
+
+    .header-btn:hover {
+      background: rgba(255,255,255,0.12);
     }
 
     .cart-btn {
       background: white;
-      color: #8b4513;
+      color: var(--maroon);
+      border: none;
+      font-weight: bold;
     }
 
-    .admin-btn {
-      background: #5d2d0b;
-      color: white;
+    .cart-btn:hover {
+      background: var(--light-cream);
     }
+
+    .logout-btn {
+      background: #8d303c;
+      color: white;
+      border: none;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      text-align: center;
+      padding: 48px 20px 35px;
+      background:
+        radial-gradient(circle at top, #fff 0%, #fffaf5 55%, #f8eee7 100%);
+      border-bottom: 1px solid #eadbd2;
+    }
+
+    .hero-small {
+      color: var(--gold);
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero h2 {
+      margin: 0;
+      color: var(--maroon);
+      font-size: 38px;
+      font-weight: normal;
+    }
+
+    .hero p {
+      max-width: 550px;
+      margin: 12px auto 0;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .ornament {
+      color: var(--gold);
+      margin: 15px 0 0;
+      font-size: 20px;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
 
     .container {
       max-width: 1100px;
       margin: auto;
-      padding: 20px;
+      padding: 28px 20px 50px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title h3 {
+      margin: 0;
+      color: var(--maroon);
+      font-size: 25px;
+      font-weight: normal;
+    }
+
+    .section-title p {
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      margin: 7px 0 0;
+    }
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-wrap {
+      max-width: 600px;
+      margin: 0 auto 18px;
+      position: relative;
     }
 
     .search-box {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      font-size: 16px;
+      padding: 14px 18px;
+      border: 1px solid #dfd2ca;
+      border-radius: 30px;
+      background: white;
+      font-size: 14px;
+      outline: none;
     }
+
+    .search-box:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(196,154,108,0.12);
+    }
+
+    /* =========================
+       CATEGORIES
+    ========================= */
 
     .categories {
       display: flex;
-      gap: 8px;
+      justify-content: center;
+      gap: 7px;
       overflow-x: auto;
-      padding-bottom: 12px;
+      padding: 4px 2px 22px;
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
     }
 
     .category-btn {
       background: white;
-      border: 1px solid #ddd;
+      color: var(--maroon);
+      border: 1px solid #dfd2ca;
+      border-radius: 22px;
+      padding: 8px 16px;
       white-space: nowrap;
+      font-size: 12px;
+    }
+
+    .category-btn:hover {
+      border-color: var(--maroon);
     }
 
     .category-btn.active {
-      background: #8b4513;
+      background: var(--maroon);
       color: white;
+      border-color: var(--maroon);
     }
+
+    /* =========================
+       PRODUCTS
+    ========================= */
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 18px;
     }
 
     .product-card {
       background: white;
-      border-radius: 14px;
+      border: 1px solid #eee2db;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-      padding-bottom: 15px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(80,30,30,0.09);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      background: #f4e9e2;
     }
 
     .product-image {
+      display: block;
       width: 100%;
-      height: 180px;
+      height: 190px;
       object-fit: cover;
-      background: #eee;
     }
 
     .product-info {
       padding: 14px;
     }
 
-    .product-name {
-      font-size: 19px;
-      font-weight: bold;
+    .product-category {
+      font-family: Arial, sans-serif;
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
       margin-bottom: 5px;
     }
 
-    .product-category {
-      color: #777;
-      font-size: 14px;
+    .product-name {
+      font-size: 18px;
+      color: var(--maroon);
       margin-bottom: 8px;
+      line-height: 1.25;
     }
 
     .product-price {
-      font-size: 18px;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      font-size: 15px;
       font-weight: bold;
-      color: #8b4513;
       margin-bottom: 8px;
     }
 
-    .available {
-      color: green;
-      font-size: 14px;
+    .available,
+    .unavailable {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
       margin-bottom: 10px;
     }
 
+    .available {
+      color: #47834e;
+    }
+
     .unavailable {
-      color: red;
-      font-size: 14px;
-      margin-bottom: 10px;
+      color: #b34b4b;
     }
 
     .add-cart-btn {
       width: 100%;
-      background: #8b4513;
+      border: 1px solid var(--maroon);
+      background: white;
+      color: var(--maroon);
+      border-radius: 7px;
+      padding: 10px;
+      font-size: 12px;
+      transition: 0.2s;
+    }
+
+    .add-cart-btn:hover {
+      background: var(--maroon);
       color: white;
+    }
+
+    /* =========================
+       ADMIN
+    ========================= */
+
+    .login-box,
+    .admin-panel {
+      background: white;
+      border: 1px solid #eadbd2;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(60,30,20,0.05);
+    }
+
+    .login-box h3,
+    .admin-panel h2 {
+      color: var(--maroon);
+      font-weight: normal;
+      margin-top: 0;
+    }
+
+    .login-box input,
+    .admin-panel input,
+    .admin-panel select,
+    .admin-panel textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd0c8;
+      border-radius: 7px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .login-btn,
+    .save-btn {
+      background: var(--maroon);
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 11px;
+      border-radius: 7px;
+    }
+
+    .login-btn:hover,
+    .save-btn:hover {
+      background: var(--dark-maroon);
     }
 
     .admin-actions {
       display: flex;
       gap: 5px;
-      margin-top: 10px;
+      margin-top: 9px;
     }
 
     .admin-actions button {
       flex: 1;
-      font-size: 12px;
-      padding: 8px;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 4px;
+      font-size: 10px;
     }
 
     .edit-btn {
-      background: #ddd;
+      background: #eee8e4;
+      color: #443b38;
     }
 
     .hide-btn {
-      background: #f0ad4e;
+      background: #c49a6c;
       color: white;
     }
 
     .delete-btn {
-      background: #d9534f;
+      background: #b84b4b;
       color: white;
     }
 
+    /* =========================
+       CART
+    ========================= */
+
     .cart-section {
-      margin-top: 30px;
+      max-width: 800px;
+      margin: 55px auto 0;
       background: white;
+      border: 1px solid #eadbd2;
       border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      padding: 25px;
+      box-shadow: 0 8px 30px rgba(60,30,20,0.06);
+    }
+
+    .cart-heading {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .cart-heading h2 {
+      color: var(--maroon);
+      font-size: 26px;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    .cart-heading p {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      margin-top: 6px;
     }
 
     .cart-item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid #eee;
-      padding: 12px 0;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee5df;
     }
 
     .cart-item-info {
@@ -207,157 +493,248 @@
     }
 
     .cart-item-name {
-      font-weight: bold;
+      color: var(--maroon);
+      font-size: 16px;
     }
 
     .cart-item-price {
-      color: #777;
-      font-size: 14px;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      margin-top: 4px;
+      line-height: 1.5;
     }
 
     .quantity-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
+      font-family: Arial, sans-serif;
     }
 
     .quantity-controls button {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       padding: 0;
-      background: #eee;
+      border: 1px solid #ddd0c8;
+      background: #faf7f4;
+      color: var(--maroon);
+      border-radius: 50%;
+    }
+
+    .quantity-controls button:hover {
+      background: var(--maroon);
+      color: white;
     }
 
     .remove-btn {
-      background: #d9534f !important;
-      color: white;
       width: auto !important;
-      padding: 5px 8px !important;
+      height: auto !important;
+      border-radius: 5px !important;
+      padding: 6px 8px !important;
+      background: transparent !important;
+      color: #b34b4b !important;
+      border: none !important;
+      font-size: 11px;
     }
 
     .cart-total {
       text-align: right;
-      font-size: 22px;
+      padding: 18px 0 5px;
+      color: var(--maroon);
+      font-family: Arial, sans-serif;
+      font-size: 20px;
       font-weight: bold;
-      color: #8b4513;
-      margin-top: 15px;
     }
 
+    .empty-cart {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    /* =========================
+       ORDER DETAILS
+    ========================= */
+
     .order-details {
-      margin-top: 25px;
-      border-top: 1px solid #eee;
-      padding-top: 20px;
+      border-top: 1px solid #eadbd2;
+      margin-top: 20px;
+      padding-top: 22px;
     }
 
     .order-details h3 {
+      color: var(--maroon);
+      font-size: 20px;
+      font-weight: normal;
       margin-top: 0;
-      color: #8b4513;
     }
 
     .order-details input,
     .order-details select,
     .order-details textarea {
       width: 100%;
-      padding: 13px;
-      margin-bottom: 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
-      font-family: inherit;
+      padding: 12px 13px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd0c8;
+      border-radius: 7px;
+      font-size: 14px;
+      outline: none;
+      background: white;
+    }
+
+    .order-details input:focus,
+    .order-details select:focus,
+    .order-details textarea:focus {
+      border-color: var(--gold);
     }
 
     .whatsapp-btn {
       width: 100%;
-      background: #25d366;
+      border: none;
+      background: var(--green);
       color: white;
-      font-size: 16px;
-      margin-top: 5px;
+      border-radius: 7px;
+      padding: 13px;
+      font-size: 14px;
+      font-weight: bold;
     }
 
-    .admin-panel {
-      display: none;
-      background: white;
-      padding: 20px;
-      border-radius: 14px;
-      margin-bottom: 25px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    .whatsapp-btn:hover {
+      filter: brightness(0.95);
     }
 
-    .admin-panel input,
-    .admin-panel select,
-    .admin-panel textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
-    }
+    /* =========================
+       FOOTER
+    ========================= */
 
-    .save-btn {
-      background: #8b4513;
+    footer {
+      background: var(--dark-maroon);
       color: white;
-      width: 100%;
-    }
-
-    .login-box {
-      display: none;
-      background: white;
-      padding: 20px;
-      border-radius: 14px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
-
-    .login-box input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-
-    .login-btn {
-      background: #8b4513;
-      color: white;
-      width: 100%;
-    }
-
-    .logout-btn {
-      background: #d9534f;
-      color: white;
-    }
-
-    .empty-cart {
       text-align: center;
-      color: #777;
-      padding: 15px;
+      padding: 30px 20px;
+      margin-top: 30px;
     }
 
-    @media (max-width: 600px) {
+    footer h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: normal;
+    }
+
+    footer p {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      opacity: 0.7;
+      margin: 8px 0 0;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 850px) {
+      .products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .header-inner {
+        padding: 13px 12px;
+      }
+
+      .brand-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+      }
+
+      .brand-text h1 {
+        font-size: 18px;
+      }
+
+      .brand-text span {
+        font-size: 8px;
+        letter-spacing: 2px;
+      }
+
+      .header-btn {
+        padding: 8px 10px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 38px 18px 28px;
+      }
+
+      .hero h2 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .container {
+        padding: 22px 12px 40px;
+      }
+
       .products {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
 
       .product-image {
-        height: 140px;
+        height: 145px;
       }
 
       .product-info {
-        padding: 10px;
+        padding: 11px;
       }
 
       .product-name {
-        font-size: 16px;
+        font-size: 15px;
       }
 
       .product-price {
-        font-size: 16px;
+        font-size: 13px;
+      }
+
+      .add-cart-btn {
+        padding: 9px 5px;
+        font-size: 11px;
+      }
+
+      .cart-section {
+        margin-top: 35px;
+        padding: 17px;
       }
 
       .cart-item {
         flex-wrap: wrap;
+      }
+
+      .quantity-controls {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .header-actions .admin-btn {
+        display: none;
+      }
+
+      .products {
+        gap: 8px;
+      }
+
+      .product-image {
+        height: 130px;
       }
     }
   </style>
@@ -366,32 +743,73 @@
 <body>
 
 <header>
-  <h1>🥖 Kanbulo Bakery</h1>
+  <div class="header-inner">
 
-  <div class="header-buttons">
-    <button class="cart-btn" onclick="scrollToCart()">
-      🛒 Cart (<span id="cartCount">0</span>)
-    </button>
+    <div class="brand">
+      <div class="brand-icon">🥖</div>
 
-    <button class="admin-btn" onclick="showLogin()">
-      🔐 Admin
-    </button>
+      <div class="brand-text">
+        <h1>KANBULO BAKERY</h1>
+        <span>FRESHLY BAKED</span>
+      </div>
+    </div>
 
-    <button
-      id="logoutButton"
-      class="logout-btn"
-      style="display:none;"
-      onclick="logoutAdmin()">
-      Logout
-    </button>
+    <div class="header-actions">
+
+      <button
+        class="header-btn cart-btn"
+        onclick="scrollToCart()">
+        🛒 Cart (<span id="cartCount">0</span>)
+      </button>
+
+      <button
+        class="header-btn admin-btn"
+        onclick="showLogin()">
+        Admin
+      </button>
+
+      <button
+        id="logoutButton"
+        class="header-btn logout-btn"
+        style="display:none;"
+        onclick="logoutAdmin()">
+        Logout
+      </button>
+
+    </div>
+
   </div>
 </header>
+
+
+<section class="hero">
+
+  <div class="hero-small">
+    Welcome to
+  </div>
+
+  <h2>Kanbulo Bakery</h2>
+
+  <p>
+    Freshly baked favourites, made with care.
+    Choose your favourites and order easily through WhatsApp.
+  </p>
+
+  <div class="ornament">
+    ✦
+  </div>
+
+</section>
 
 
 <div class="container">
 
   <!-- LOGIN -->
-  <div id="loginBox" class="login-box">
+
+  <div
+    id="loginBox"
+    class="login-box"
+    style="display:none;">
 
     <h3>Admin Login</h3>
 
@@ -415,9 +833,15 @@
 
 
   <!-- ADMIN PANEL -->
-  <div id="adminPanel" class="admin-panel">
 
-    <h2 id="formTitle">Add Product</h2>
+  <div
+    id="adminPanel"
+    class="admin-panel"
+    style="display:none;">
+
+    <h2 id="formTitle">
+      Add Product
+    </h2>
 
     <input
       type="text"
@@ -425,12 +849,31 @@
       placeholder="Product name">
 
     <select id="productCategory">
-      <option value="Bakery">Bakery</option>
-      <option value="Bread">Bread</option>
-      <option value="Buns">Buns</option>
-      <option value="Cakes">Cakes</option>
-      <option value="Snacks">Snacks</option>
-      <option value="Desserts">Desserts</option>
+
+      <option value="Bakery">
+        Bakery
+      </option>
+
+      <option value="Bread">
+        Bread
+      </option>
+
+      <option value="Buns">
+        Buns
+      </option>
+
+      <option value="Cakes">
+        Cakes
+      </option>
+
+      <option value="Snacks">
+        Snacks
+      </option>
+
+      <option value="Desserts">
+        Desserts
+      </option>
+
     </select>
 
     <input
@@ -457,7 +900,7 @@
 
     <button
       id="cancelEditButton"
-      style="display:none; margin-top:10px; width:100%;"
+      style="display:none; margin-top:10px; width:100%; padding:10px; border:1px solid #ddd; background:white; border-radius:7px;"
       onclick="cancelEdit()">
       Cancel Edit
     </button>
@@ -465,16 +908,33 @@
   </div>
 
 
-  <!-- SEARCH -->
-  <input
-    type="text"
-    id="searchInput"
-    class="search-box"
-    placeholder="🔍 Search bakery items..."
-    oninput="renderProducts()">
+  <!-- PRODUCTS -->
+
+  <div class="section-title">
+
+    <h3>Our Fresh Favourites</h3>
+
+    <p>
+      Browse our freshly prepared bakery selection
+    </p>
+
+  </div>
+
+
+  <div class="search-wrap">
+
+    <input
+      type="text"
+      id="searchInput"
+      class="search-box"
+      placeholder="🔍  Search bakery items..."
+      oninput="renderProducts()">
+
+  </div>
 
 
   <!-- CATEGORIES -->
+
   <div class="categories">
 
     <button
@@ -523,6 +983,7 @@
 
 
   <!-- PRODUCTS -->
+
   <div
     id="products"
     class="products">
@@ -530,11 +991,20 @@
 
 
   <!-- CART -->
+
   <div
     id="cartSection"
     class="cart-section">
 
-    <h2>🛒 Your Cart</h2>
+    <div class="cart-heading">
+
+      <h2>Your Cart</h2>
+
+      <p>
+        Review your order before sending it to us
+      </p>
+
+    </div>
 
     <div id="cartItems"></div>
 
@@ -542,17 +1012,17 @@
       id="cartSummary"
       style="display:none;">
 
-      <div
-        class="cart-total">
+      <div class="cart-total">
         Total: MVR
         <span id="cartTotal">0.00</span>
       </div>
 
 
-      <!-- CUSTOMER DETAILS -->
+      <!-- ORDER DETAILS -->
+
       <div class="order-details">
 
-        <h3>📋 Order Details</h3>
+        <h3>Order Details</h3>
 
         <input
           type="text"
@@ -601,6 +1071,17 @@
   </div>
 
 </div>
+
+
+<footer>
+
+  <h3>KANBULO BAKERY</h3>
+
+  <p>
+    Freshly baked with care • Thank you for supporting us
+  </p>
+
+</footer>
 
 
 <script>
@@ -773,14 +1254,19 @@
   async function loginAdmin() {
 
     const email =
-      document.getElementById(
-        "loginEmail"
-      ).value.trim();
+      document
+        .getElementById(
+          "loginEmail"
+        )
+        .value
+        .trim();
 
     const password =
-      document.getElementById(
-        "loginPassword"
-      ).value;
+      document
+        .getElementById(
+          "loginPassword"
+        )
+        .value;
 
     if (!email || !password) {
 
@@ -930,7 +1416,16 @@
     if (filtered.length === 0) {
 
       container.innerHTML =
-        "<p>No products found.</p>";
+        `
+          <p style="
+            grid-column:1/-1;
+            text-align:center;
+            color:#827775;
+            font-family:Arial,sans-serif;
+            padding:30px;">
+            No products found.
+          </p>
+        `;
 
       return;
     }
@@ -948,22 +1443,27 @@
             "https://via.placeholder.com/500x350?text=Kanbulo+Bakery";
 
           return `
+
             <div class="product-card">
 
-              <img
-                class="product-image"
-                src="${image}"
-                alt="${escapeHtml(product.name)}"
-                onerror="this.src='https://via.placeholder.com/500x350?text=Kanbulo+Bakery'">
+              <div class="product-image-wrap">
+
+                <img
+                  class="product-image"
+                  src="${image}"
+                  alt="${escapeHtml(product.name)}"
+                  onerror="this.src='https://via.placeholder.com/500x350?text=Kanbulo+Bakery'">
+
+              </div>
 
               <div class="product-info">
 
-                <div class="product-name">
-                  ${escapeHtml(product.name)}
-                </div>
-
                 <div class="product-category">
                   ${escapeHtml(product.category || "")}
+                </div>
+
+                <div class="product-name">
+                  ${escapeHtml(product.name)}
                 </div>
 
                 <div class="product-price">
@@ -984,7 +1484,6 @@
                     `
                 }
 
-
                 ${
                   availability
                     ? `
@@ -996,7 +1495,6 @@
                     `
                     : ""
                 }
-
 
                 ${
                   isAdmin
@@ -1029,6 +1527,7 @@
               </div>
 
             </div>
+
           `;
         })
         .join("");
@@ -1066,14 +1565,12 @@
       return;
     }
 
-
     const existing =
       cart.find(
         item =>
           String(item.id) ===
           String(productId)
       );
-
 
     if (existing) {
 
@@ -1093,9 +1590,7 @@
         quantity: 1
 
       });
-
     }
-
 
     saveCart();
 
@@ -1123,11 +1618,9 @@
 
     if (!item) return;
 
-
     item.quantity =
       Number(item.quantity) +
       Number(change);
-
 
     if (item.quantity <= 0) {
 
@@ -1138,7 +1631,6 @@
             String(productId)
         );
     }
-
 
     saveCart();
 
@@ -1250,6 +1742,10 @@
         `
           <div class="empty-cart">
             Your cart is empty 🛒
+            <br>
+            <span style="font-size:12px;">
+              Add something delicious from our bakery.
+            </span>
           </div>
         `;
 
@@ -1279,6 +1775,7 @@
 
 
           return `
+
             <div class="cart-item">
 
               <div class="cart-item-info">
@@ -1288,10 +1785,9 @@
                 </div>
 
                 <div class="cart-item-price">
-                  MVR ${price.toFixed(2)}
-                  each
+                  MVR ${price.toFixed(2)} each
                   <br>
-                  MVR ${itemTotal.toFixed(2)}
+                  Item total: MVR ${itemTotal.toFixed(2)}
                 </div>
 
               </div>
@@ -1322,6 +1818,7 @@
               </div>
 
             </div>
+
           `;
         })
         .join("");
