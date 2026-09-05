@@ -1,3 +1,5 @@
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,14 +82,23 @@
     }
 
     .brand-icon {
-      width: 44px;
-      height: 44px;
-      border: 1px solid rgba(255,255,255,0.45);
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
+      overflow: hidden;
+      background: white;
+      border: 2px solid rgba(255,255,255,0.75);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .brand-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     .brand-text h1 {
@@ -648,9 +659,8 @@
       }
 
       .brand-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
+        width: 42px;
+        height: 42px;
       }
 
       .brand-text h1 {
@@ -725,6 +735,7 @@
     }
 
     @media (max-width: 390px) {
+
       .header-actions .admin-btn {
         display: none;
       }
@@ -746,12 +757,19 @@
   <div class="header-inner">
 
     <div class="brand">
-      <div class="brand-icon">🥖</div>
+
+      <!-- KANBULO BAKERY LOGO -->
+      <div class="brand-icon">
+        <img
+          src="FB_IMG_1741208862178.jpg"
+          alt="Kanbulo Bakery Logo">
+      </div>
 
       <div class="brand-text">
         <h1>KANBULO BAKERY</h1>
         <span>FRESHLY BAKED</span>
       </div>
+
     </div>
 
     <div class="header-actions">
@@ -2650,3 +2668,4 @@
 
 </body>
 </html>
+```
