@@ -1,4 +1,3 @@
-  ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
@@ -22,77 +20,35 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f8f4ef;
+      background: #fff8f2;
       color: #333;
     }
 
     header {
       background: #8b4513;
       color: white;
+      padding: 18px;
       text-align: center;
-      padding: 22px 15px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     header h1 {
-      margin: 0;
-      font-size: 30px;
+      margin: 0 0 10px;
+      font-size: 28px;
     }
 
     header p {
-      margin: 8px 0 12px;
-      font-size: 15px;
+      margin: 0 0 12px;
     }
 
-    .header-cart-btn {
-      background: white;
-      color: #8b4513;
-      font-weight: bold;
-      padding: 11px 18px;
-      border-radius: 25px;
-    }
-
-    .header-cart-btn:hover {
-      background: #f5eee8;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    .admin-login,
-    .admin-panel,
-    .cart-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
-
-    .admin-login h2,
-    .admin-panel h2,
-    .cart-box h2 {
-      margin-top: 0;
-      color: #8b4513;
-    }
-
-    .admin-login input,
-    .admin-panel input,
-    .admin-panel textarea,
-    .admin-panel select {
-      width: 100%;
-      padding: 12px;
-      margin: 7px 0 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-
-    .admin-panel textarea {
-      min-height: 90px;
-      resize: vertical;
+    .header-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     button {
@@ -103,172 +59,58 @@
       font-size: 14px;
     }
 
-    .login-btn,
-    .save-btn {
-      background: #8b4513;
+    .cart-top-btn {
+      background: white;
+      color: #8b4513;
+      font-weight: bold;
+    }
+
+    .login-btn {
+      background: #5c2e0b;
       color: white;
     }
 
     .logout-btn {
-      background: #555;
+      background: #333;
       color: white;
     }
 
-    .cancel-btn {
-      background: #ddd;
-      color: #333;
-    }
-
-    .login-btn:hover,
-    .save-btn:hover {
-      background: #6f350f;
-    }
-
-    .logout-btn:hover {
-      background: #333;
-    }
-
-    .message {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .admin-status {
-      background: #f3eee8;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 15px;
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
     }
 
     .search-box {
-      margin-bottom: 15px;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
       margin-bottom: 20px;
     }
 
-    .category-btn {
-      background: white;
-      color: #8b4513;
-      border: 1px solid #8b4513;
-    }
-
-    .category-btn.active,
-    .category-btn:hover {
-      background: #8b4513;
-      color: white;
-    }
-
-    /* ================================
-       CART
-    ================================= */
-
-    .cart-box {
-      border: 2px solid #8b4513;
-    }
-
-    .cart-empty {
-      color: #777;
-      text-align: center;
-      padding: 10px;
-    }
-
-    .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .cart-item-info {
-      flex: 1;
-    }
-
-    .cart-item-name {
-      font-weight: bold;
-      color: #8b4513;
-    }
-
-    .cart-item-price {
-      font-size: 13px;
-      color: #777;
-      margin-top: 4px;
-      line-height: 1.5;
-    }
-
-    .quantity-controls {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .quantity-controls button {
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      background: #8b4513;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .quantity {
-      min-width: 25px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .remove-btn {
-      background: #c62828;
-      color: white;
-      font-size: 12px;
-      padding: 7px 9px;
-    }
-
-    .cart-total {
-      text-align: right;
-      font-size: 20px;
-      font-weight: bold;
-      color: #8b4513;
-      padding: 18px 0 12px;
-    }
-
-    .whatsapp-btn {
+    #search {
       width: 100%;
-      background: #25D366;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
       padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
     }
 
-    .whatsapp-btn:hover {
-      background: #1da851;
+    .category-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
     }
 
-    /* ================================
-       PRODUCTS
-    ================================= */
+    .category-buttons button {
+      background: #eee;
+      color: #333;
+    }
 
-    #products {
+    .category-buttons button.active {
+      background: #8b4513;
+      color: white;
+    }
+
+    .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 20px;
@@ -276,150 +118,275 @@
 
     .product-card {
       background: white;
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+      padding-bottom: 15px;
     }
 
-    .product-card img {
+    .product-image {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
-      display: block;
+      background: #eee;
     }
 
-    .product-content {
+    .product-info {
       padding: 15px;
     }
 
-    .product-content h3 {
-      margin: 0 0 8px;
-      color: #8b4513;
+    .product-name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 7px;
     }
 
-    .price {
-      font-weight: bold;
+    .product-category {
+      color: #777;
+      margin-bottom: 7px;
+    }
+
+    .product-price {
+      color: #8b4513;
       font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .category-label {
-      display: inline-block;
-      background: #f1e5d8;
-      color: #8b4513;
-      padding: 4px 8px;
-      border-radius: 20px;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    .description {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 10px;
-    }
-
-    .availability {
       font-weight: bold;
-      margin-bottom: 12px;
+      margin-bottom: 7px;
     }
 
     .available {
       color: green;
+      font-weight: bold;
     }
 
     .unavailable {
-      color: #c00;
+      color: red;
+      font-weight: bold;
     }
 
     .card-buttons {
       display: flex;
+      gap: 6px;
       flex-wrap: wrap;
-      gap: 7px;
+      padding: 0 15px;
     }
 
     .add-cart-btn {
+      width: calc(100% - 30px);
+      margin: 5px 15px 0;
       background: #8b4513;
       color: white;
-      width: 100%;
       font-weight: bold;
     }
 
-    .add-cart-btn:hover {
-      background: #6f350f;
-    }
-
     .edit-btn {
-      background: #1976d2;
+      background: #3498db;
       color: white;
     }
 
     .hide-btn {
-      background: #e69b00;
+      background: #f39c12;
       color: white;
     }
 
     .delete-btn {
-      background: #c62828;
+      background: #e74c3c;
       color: white;
     }
 
-    .preview {
-      max-width: 180px;
-      max-height: 130px;
-      margin: 5px 0 12px;
+    #adminPanel {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    }
+
+    #adminPanel h2 {
+      margin-top: 0;
+      color: #8b4513;
+    }
+
+    #adminPanel input,
+    #adminPanel select,
+    #adminPanel textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
       border-radius: 8px;
+      font-size: 15px;
+    }
+
+    #adminPanel textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .admin-save-btn {
+      background: #8b4513;
+      color: white;
+      font-weight: bold;
+    }
+
+    .admin-cancel-btn {
+      background: #777;
+      color: white;
+    }
+
+    .cart-section {
+      background: white;
+      margin-top: 35px;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    }
+
+    .cart-section h2 {
+      color: #8b4513;
+      margin-top: 0;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .cart-item-price {
+      color: #777;
+      margin: 5px 0;
+    }
+
+    .cart-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .quantity-btn {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      background: #8b4513;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .quantity-number {
+      min-width: 35px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .remove-btn {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .cart-subtotal {
+      margin-top: 7px;
+      font-weight: bold;
+    }
+
+    .cart-total {
+      border-top: 2px solid #8b4513;
+      margin-top: 15px;
+      padding-top: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: right;
+      color: #8b4513;
+    }
+
+    .whatsapp-btn {
+      width: 100%;
+      background: #25d366;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+      padding: 14px;
+    }
+
+    .empty-cart {
+      text-align: center;
+      color: #777;
+      padding: 20px;
+    }
+
+    .login-message {
+      text-align: center;
+      background: #fff3cd;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
       display: none;
     }
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #777;
-      font-size: 14px;
+    .status-message {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: none;
     }
 
     @media (max-width: 600px) {
-
       header h1 {
-        font-size: 25px;
+        font-size: 24px;
       }
 
-      .container {
+      main {
         padding: 12px;
       }
 
-      #products {
+      .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
       }
 
-      .product-card img {
-        height: 140px;
+      .product-image {
+        height: 150px;
       }
 
-      .product-content {
+      .product-info {
         padding: 10px;
       }
 
+      .product-name {
+        font-size: 17px;
+      }
+
+      .product-price {
+        font-size: 16px;
+      }
+
+      .card-buttons {
+        padding: 0 10px;
+      }
+
+      .add-cart-btn {
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
       .card-buttons button {
-        width: 100%;
+        font-size: 12px;
+        padding: 8px;
       }
-
-      .cart-item {
-        flex-wrap: wrap;
-      }
-
-      .cart-item-info {
-        min-width: 100%;
-      }
-
-      .quantity-controls {
-        margin-top: 5px;
-      }
-
     }
-
   </style>
 
 </head>
@@ -430,99 +397,65 @@
 
   <h1>🥖 Kanbulo Bakery</h1>
 
-  <p>Freshly baked with love ❤️</p>
+  <p>Fresh & Delicious Every Day</p>
 
-  <button
-    class="header-cart-btn"
-    onclick="scrollToCart()"
-  >
-    🛒 Cart (<span id="cartCount">0</span>)
-  </button>
-
-</header>
-
-
-<div class="container">
-
-  <!-- ================================
-       ADMIN LOGIN
-  ================================= -->
-
-  <div
-    id="adminLoginBox"
-    class="admin-login"
-  >
-
-    <h2>🔐 Admin Login</h2>
-
-    <input
-      type="email"
-      id="adminEmail"
-      placeholder="Admin email"
-      autocomplete="username"
-    >
-
-    <input
-      type="password"
-      id="adminPassword"
-      placeholder="Admin password"
-      autocomplete="current-password"
-    >
+  <div class="header-buttons">
 
     <button
+      class="cart-top-btn"
+      onclick="scrollToCart()"
+    >
+      🛒 Cart (<span id="cartCount">0</span>)
+    </button>
+
+    <button
+      id="loginButton"
       class="login-btn"
       onclick="loginAdmin()"
     >
-      Login as Admin
+      🔐 Admin Login
     </button>
 
-    <div
-      id="loginMessage"
-      class="message"
-    ></div>
-
-  </div>
-
-
-  <!-- ================================
-       ADMIN PANEL
-  ================================= -->
-
-  <div
-    id="adminPanel"
-    class="admin-panel hidden"
-  >
-
-    <h2>⚙️ Bakery Admin</h2>
-
-    <div class="admin-status">
-      ✅ You are logged in as the bakery administrator.
-    </div>
-
     <button
+      id="logoutButton"
       class="logout-btn"
       onclick="logoutAdmin()"
+      style="display:none;"
     >
       Logout
     </button>
 
-    <hr>
+  </div>
 
-    <h3 id="formTitle">
-      ➕ Add Product
-    </h3>
+</header>
+
+
+<main>
+
+  <div
+    id="loginMessage"
+    class="login-message"
+  >
+    You are logged in as administrator.
+  </div>
+
+
+  <div
+    id="statusMessage"
+    class="status-message"
+  ></div>
+
+
+  <!-- ADMIN PANEL -->
+
+  <div id="adminPanel">
+
+    <h2>⚙️ Admin Panel</h2>
 
     <input
       type="text"
       id="productName"
       placeholder="Product name"
-    >
-
-    <input
-      type="number"
-      id="productPrice"
-      placeholder="Price (MVR)"
-      step="0.01"
     >
 
     <select id="productCategory">
@@ -531,157 +464,122 @@
         Bakery
       </option>
 
+      <option value="Bread">
+        Bread
+      </option>
+
+      <option value="Buns">
+        Buns
+      </option>
+
       <option value="Cakes">
         Cakes
       </option>
 
-      <option value="Sweets">
-        Sweets
+      <option value="Snacks">
+        Snacks
       </option>
 
-      <option value="Other">
-        Other
+      <option value="Desserts">
+        Desserts
       </option>
 
     </select>
 
+    <input
+      type="number"
+      id="productPrice"
+      placeholder="Price"
+      step="0.01"
+    >
+
     <textarea
       id="productDescription"
-      placeholder="Product description"
+      placeholder="Description"
     ></textarea>
 
     <input
       type="file"
       id="productImage"
       accept="image/*"
-      onchange="previewImage(event)"
     >
-
-    <img
-      id="imagePreview"
-      class="preview"
-    >
-
-    <br>
 
     <button
-      class="save-btn"
+      class="admin-save-btn"
       onclick="saveProduct()"
     >
       💾 Save Product
     </button>
 
     <button
-      class="cancel-btn"
+      class="admin-cancel-btn"
       onclick="cancelEdit()"
-      id="cancelButton"
-      style="display:none;"
     >
       Cancel
     </button>
 
-    <div
-      id="message"
-      class="message"
-    ></div>
-
   </div>
 
 
-  <!-- ================================
-       CART
-  ================================= -->
-
-  <div
-    id="cartBox"
-    class="cart-box"
-  >
-
-    <h2>🛒 Your Cart</h2>
-
-    <div id="cartItems"></div>
-
-    <div
-      id="cartSummary"
-      class="hidden"
-    >
-
-      <div class="cart-total">
-
-        Total: MVR
-        <span id="cartTotal">
-          0.00
-        </span>
-
-      </div>
-
-      <button
-        class="whatsapp-btn"
-        onclick="orderOnWhatsApp()"
-      >
-        💬 Order on WhatsApp
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- ================================
-       SEARCH
-  ================================= -->
+  <!-- SEARCH -->
 
   <div class="search-box">
 
     <input
       type="text"
       id="search"
-      placeholder="🔍 Search products..."
-      oninput="filterProducts()"
+      placeholder="🔎 Search bakery items..."
+      oninput="displayProducts()"
     >
 
   </div>
 
 
-  <!-- ================================
-       CATEGORIES
-  ================================= -->
+  <!-- CATEGORY FILTER -->
 
-  <div class="categories">
+  <div class="category-buttons">
 
     <button
-      class="category-btn active"
-      onclick="selectCategory('All', this)"
+      class="active"
+      onclick="filterCategory('All', this)"
     >
       All
     </button>
 
     <button
-      class="category-btn"
-      onclick="selectCategory('Bakery', this)"
+      onclick="filterCategory('Bakery', this)"
     >
       Bakery
     </button>
 
     <button
-      class="category-btn"
-      onclick="selectCategory('Cakes', this)"
+      onclick="filterCategory('Bread', this)"
+    >
+      Bread
+    </button>
+
+    <button
+      onclick="filterCategory('Buns', this)"
+    >
+      Buns
+    </button>
+
+    <button
+      onclick="filterCategory('Cakes', this)"
     >
       Cakes
     </button>
 
     <button
-      class="category-btn"
-      onclick="selectCategory('Sweets', this)"
+      onclick="filterCategory('Snacks', this)"
     >
-      Sweets
+      Snacks
     </button>
 
     <button
-      class="category-btn"
-      onclick="selectCategory('Other', this)"
+      onclick="filterCategory('Desserts', this)"
     >
-      Other
+      Desserts
     </button>
 
   </div>
@@ -689,21 +587,38 @@
 
   <!-- PRODUCTS -->
 
-  <div id="products"></div>
+  <div
+    id="products"
+    class="products-grid"
+  >
+  </div>
 
-</div>
 
+  <!-- CART -->
 
-<footer>
-  © 2026 Kanbulo Bakery
-</footer>
+  <section
+    id="cartSection"
+    class="cart-section"
+  >
+
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems">
+    </div>
+
+    <div id="cartSummary">
+    </div>
+
+  </section>
+
+</main>
 
 
 <script>
 
-  /* ================================
+  /* =========================
      SUPABASE
-  ================================= */
+  ========================= */
 
   const SUPABASE_URL =
     "https://kyrkcfytfptlwzyemwlw.supabase.co";
@@ -718,9 +633,9 @@
     );
 
 
-  /* ================================
-     ADMIN SETTINGS
-  ================================= */
+  /* =========================
+     SETTINGS
+  ========================= */
 
   const ADMIN_USER_ID =
     "fa350331-2645-4ca3-b16a-11819fe7d5f5";
@@ -729,543 +644,62 @@
     "9607359040";
 
 
-  let isAdmin = false;
-  let currentUser = null;
+  /* =========================
+     VARIABLES
+  ========================= */
 
   let products = [];
-  let editingId = null;
+
+  let cart =
+    JSON.parse(
+      localStorage.getItem("kanbuloCart") || "[]"
+    );
+
   let selectedCategory = "All";
-  let selectedImageFile = null;
 
-  let cart = [];
+  let isAdmin = false;
 
-
-  /* ================================
-     AUTH INITIALIZATION
-  ================================= */
-
-  async function initAuth() {
-
-    const {
-      data: { session }
-    } =
-      await supabaseClient.auth.getSession();
-
-    setAdminUI(
-      session ? session.user : null
-    );
+  let editingProductId = null;
 
 
-    supabaseClient.auth.onAuthStateChange(
-      (event, session) => {
+  /* =========================
+     ESCAPE HTML
+  ========================= */
 
-        setAdminUI(
-          session ? session.user : null
-        );
+  function escapeHtml(value) {
 
-      }
-    );
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
   }
 
 
-  /* ================================
-     ADMIN UI
-  ================================= */
-
-  function setAdminUI(user) {
-
-    currentUser = user;
-
-    isAdmin =
-      !!user &&
-      user.id === ADMIN_USER_ID;
-
-
-    const loginBox =
-      document.getElementById(
-        "adminLoginBox"
-      );
-
-    const adminPanel =
-      document.getElementById(
-        "adminPanel"
-      );
-
-
-    if (isAdmin) {
-
-      loginBox.classList.add(
-        "hidden"
-      );
-
-      adminPanel.classList.remove(
-        "hidden"
-      );
-
-    } else {
-
-      loginBox.classList.remove(
-        "hidden"
-      );
-
-      adminPanel.classList.add(
-        "hidden"
-      );
-
-    }
-
-
-    displayProducts();
-
-  }
-
-
-  /* ================================
-     ADMIN LOGIN
-  ================================= */
-
-  async function loginAdmin() {
-
-    const email =
-      document
-        .getElementById("adminEmail")
-        .value
-        .trim();
-
-    const password =
-      document
-        .getElementById("adminPassword")
-        .value;
-
-    const message =
-      document.getElementById(
-        "loginMessage"
-      );
-
-
-    if (!email || !password) {
-
-      message.style.color = "red";
-
-      message.textContent =
-        "Please enter your email and password.";
-
-      return;
-
-    }
-
-
-    message.style.color =
-      "#8b4513";
-
-    message.textContent =
-      "Logging in...";
-
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth
-        .signInWithPassword({
-
-          email: email,
-          password: password
-
-        });
-
-
-    if (error) {
-
-      message.style.color =
-        "red";
-
-      message.textContent =
-        "Login failed: " +
-        error.message;
-
-      return;
-
-    }
-
-
-    if (
-      !data.user ||
-      data.user.id !== ADMIN_USER_ID
-    ) {
-
-      await supabaseClient.auth.signOut();
-
-      message.style.color =
-        "red";
-
-      message.textContent =
-        "This account is not authorized as bakery admin.";
-
-      return;
-
-    }
-
-
-    document.getElementById(
-      "adminPassword"
-    ).value = "";
-
-
-    message.style.color =
-      "green";
-
-    message.textContent =
-      "Login successful!";
-
-  }
-
-
-  /* ================================
-     LOGOUT
-  ================================= */
-
-  async function logoutAdmin() {
-
-    await supabaseClient.auth.signOut();
-
-    cancelEdit();
-
-  }
-
-
-  /* ================================
-     LOAD PRODUCTS
-  ================================= */
-
-  async function loadProducts() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("products")
-        .select("*")
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        );
-
-
-    if (error) {
-
-      console.error(error);
-
-      document.getElementById(
-        "products"
-      ).innerHTML =
-        "<p>Unable to load products.</p>";
-
-      return;
-
-    }
-
-
-    products =
-      data || [];
-
-    displayProducts();
-
-  }
-
-
-  /* ================================
-     DISPLAY PRODUCTS
-  ================================= */
-
-  function displayProducts() {
-
-    const container =
-      document.getElementById(
-        "products"
-      );
-
-
-    const search =
-      document
-        .getElementById("search")
-        .value
-        .toLowerCase();
-
-
-    let filtered =
-      products.filter(
-        product => {
-
-          const matchesSearch =
-            product.name
-              .toLowerCase()
-              .includes(search);
-
-
-          const matchesCategory =
-            selectedCategory === "All" ||
-            product.category ===
-              selectedCategory;
-
-
-          return (
-            matchesSearch &&
-            matchesCategory
-          );
-
-        }
-      );
-
-
-    if (filtered.length === 0) {
-
-      container.innerHTML =
-        "<p>No products found.</p>";
-
-      return;
-
-    }
-
-
-    container.innerHTML =
-      filtered
-        .map(product => {
-
-          const image =
-            product.image_url ||
-            "https://via.placeholder.com/500x350?text=Kanbulo+Bakery";
-
-
-          const availability =
-            product.available !== false;
-
-
-          let adminButtons = "";
-
-
-          /* ADMIN BUTTONS */
-
-          if (isAdmin) {
-
-            adminButtons = `
-
-              <div class="card-buttons">
-
-                <button
-                  class="edit-btn"
-                  onclick="editProduct(${product.id})"
-                >
-                  ✏️ Edit
-                </button>
-
-                <button
-                  class="hide-btn"
-                  onclick="toggleAvailability(
-                    ${product.id},
-                    ${availability}
-                  )"
-                >
-                  ${
-                    availability
-                      ? "🙈 Hide"
-                      : "👁️ Show"
-                  }
-                </button>
-
-                <button
-                  class="delete-btn"
-                  onclick="deleteProduct(${product.id})"
-                >
-                  🗑️ Delete
-                </button>
-
-              </div>
-
-            `;
-
-          }
-
-
-          /* ADD TO CART */
-
-          let cartButton = "";
-
-
-          if (
-            availability &&
-            !isAdmin
-          ) {
-
-            cartButton = `
-
-              <button
-                class="add-cart-btn"
-                onclick="addToCart(${product.id})"
-              >
-                🛍️ Add to Cart
-              </button>
-
-            `;
-
-          }
-
-
-          return `
-
-            <div class="product-card">
-
-              <img
-                src="${escapeHtml(image)}"
-                alt="${escapeHtml(product.name)}"
-              >
-
-              <div class="product-content">
-
-                <span class="category-label">
-                  ${escapeHtml(
-                    product.category ||
-                    "Other"
-                  )}
-                </span>
-
-                <h3>
-                  ${escapeHtml(
-                    product.name
-                  )}
-                </h3>
-
-                <div class="price">
-                  MVR
-                  ${Number(
-                    product.price
-                  ).toFixed(2)}
-                </div>
-
-                <div class="description">
-                  ${escapeHtml(
-                    product.description ||
-                    ""
-                  )}
-                </div>
-
-                <div
-                  class="availability ${
-                    availability
-                      ? "available"
-                      : "unavailable"
-                  }"
-                >
-
-                  ${
-                    availability
-                      ? "✅ Available"
-                      : "❌ Currently unavailable"
-                  }
-
-                </div>
-
-                ${cartButton}
-
-                ${adminButtons}
-
-              </div>
-
-            </div>
-
-          `;
-
-        })
-        .join("");
-
-  }
-
-
-  /* ================================
-     SEARCH
-  ================================= */
-
-  function filterProducts() {
-
-    displayProducts();
-
-  }
-
-
-  /* ================================
-     CATEGORY
-  ================================= */
-
-  function selectCategory(
-    category,
-    button
-  ) {
-
-    selectedCategory =
-      category;
-
-
-    document
-      .querySelectorAll(
-        ".category-btn"
-      )
-      .forEach(btn => {
-
-        btn.classList.remove(
-          "active"
-        );
-
-      });
-
-
-    button.classList.add(
-      "active"
-    );
-
-
-    displayProducts();
-
-  }
-
-
-  /* ================================
-     CART
-  ================================= */
+  /* =========================
+     CART STORAGE
+  ========================= */
 
   function loadCart() {
 
     try {
 
-      const savedCart =
-        localStorage.getItem(
-          "kanbuloCart"
+      cart =
+        JSON.parse(
+          localStorage.getItem("kanbuloCart") || "[]"
         );
 
-
-      if (savedCart) {
-
-        cart =
-          JSON.parse(
-            savedCart
-          );
-
+      if (!Array.isArray(cart)) {
+        cart = [];
       }
 
     } catch (error) {
 
-      console.error(
-        "Could not load cart:",
-        error
-      );
-
       cart = [];
 
     }
-
 
     renderCart();
 
@@ -1282,9 +716,11 @@
   }
 
 
-  function addToCart(
-    productId
-  ) {
+  /* =========================
+     ADD TO CART
+  ========================= */
+
+  function addToCart(productId) {
 
     const product =
       products.find(
@@ -1293,7 +729,6 @@
           String(productId)
       );
 
-
     if (!product) {
 
       alert(
@@ -1301,20 +736,16 @@
       );
 
       return;
-
     }
 
 
-    if (
-      product.available === false
-    ) {
+    if (product.available === false) {
 
       alert(
         "Sorry, this product is currently unavailable."
       );
 
       return;
-
     }
 
 
@@ -1338,8 +769,7 @@
 
         name: product.name,
 
-        price:
-          Number(product.price),
+        price: Number(product.price),
 
         quantity: 1
 
@@ -1356,6 +786,10 @@
 
   }
 
+
+  /* =========================
+     CHANGE QUANTITY
+  ========================= */
 
   function changeCartQuantity(
     productId,
@@ -1378,9 +812,7 @@
       Number(change);
 
 
-    if (
-      item.quantity <= 0
-    ) {
+    if (item.quantity <= 0) {
 
       cart =
         cart.filter(
@@ -1399,9 +831,11 @@
   }
 
 
-  function removeFromCart(
-    productId
-  ) {
+  /* =========================
+     REMOVE CART ITEM
+  ========================= */
+
+  function removeFromCart(productId) {
 
     cart =
       cart.filter(
@@ -1418,13 +852,14 @@
   }
 
 
+  /* =========================
+     CART TOTAL
+  ========================= */
+
   function getCartTotal() {
 
     return cart.reduce(
-      (
-        total,
-        item
-      ) => {
+      (total, item) => {
 
         const price =
           Number(item.price) || 0;
@@ -1433,10 +868,7 @@
           Number(item.quantity) || 0;
 
         return total +
-          (
-            price *
-            quantity
-          );
+          (price * quantity);
 
       },
       0
@@ -1444,6 +876,10 @@
 
   }
 
+
+  /* =========================
+     RENDER CART
+  ========================= */
 
   function renderCart() {
 
@@ -1463,207 +899,37 @@
       );
 
 
-    const total =
-      getCartTotal();
-
-
-    const totalItems =
+    const totalQuantity =
       cart.reduce(
-        (
-          sum,
-          item
-        ) => {
-
-          return sum +
-            (
-              Number(
-                item.quantity
-              ) || 0
-            );
-
-        },
+        (total, item) =>
+          total +
+          Number(item.quantity || 0),
         0
       );
 
 
     cartCount.textContent =
-      totalItems;
+      totalQuantity;
 
 
-    if (
-      cart.length === 0
-    ) {
+    if (cart.length === 0) {
 
       cartItems.innerHTML = `
-
-        <div class="cart-empty">
-
+        <div class="empty-cart">
           🛒 Your cart is empty.
-
           <br>
-
           Add some delicious bakery items!
-
         </div>
-
       `;
 
-
-      cartSummary.classList.add(
-        "hidden"
-      );
+      cartSummary.innerHTML = "";
 
       return;
-
     }
-
-
-    cartSummary.classList.remove(
-      "hidden"
-    );
 
 
     cartItems.innerHTML =
-      cart
-        .map(item => {
-
-          const price =
-            Number(item.price) || 0;
-
-          const quantity =
-            Number(item.quantity) || 0;
-
-          const itemTotal =
-            price *
-            quantity;
-
-
-          return `
-
-            <div class="cart-item">
-
-              <div class="cart-item-info">
-
-                <div class="cart-item-name">
-                  ${escapeHtml(
-                    item.name
-                  )}
-                </div>
-
-                <div class="cart-item-price">
-
-                  MVR
-                  ${price.toFixed(2)}
-                  each
-
-                  <br>
-
-                  Quantity:
-                  ${quantity}
-
-                  <br>
-
-                  Subtotal:
-                  MVR
-                  ${itemTotal.toFixed(2)}
-
-                </div>
-
-              </div>
-
-
-              <div class="quantity-controls">
-
-                <button
-                  onclick="changeCartQuantity(
-                    '${String(item.id)}',
-                    -1
-                  )"
-                >
-                  −
-                </button>
-
-                <span class="quantity">
-                  ${quantity}
-                </span>
-
-                <button
-                  onclick="changeCartQuantity(
-                    '${String(item.id)}',
-                    1
-                  )"
-                >
-                  +
-                </button>
-
-              </div>
-
-
-              <button
-                class="remove-btn"
-                onclick="removeFromCart(
-                  '${String(item.id)}'
-                )"
-              >
-                Remove
-              </button>
-
-            </div>
-
-          `;
-
-        })
-        .join("");
-
-
-    document.getElementById(
-      "cartTotal"
-    ).textContent =
-      total.toFixed(2);
-
-  }
-
-
-  function scrollToCart() {
-
-    document
-      .getElementById("cartBox")
-      .scrollIntoView({
-
-        behavior: "smooth",
-
-        block: "start"
-
-      });
-
-  }
-
-
-  /* ================================
-     WHATSAPP ORDER
-  ================================= */
-
-  function orderOnWhatsApp() {
-
-    if (
-      cart.length === 0
-    ) {
-
-      alert(
-        "Your cart is empty."
-      );
-
-      return;
-
-    }
-
-
-    let message =
-      "🥖 *KANBULO BAKERY ORDER*\n\n";
-
-
-    cart.forEach(
-      item => {
+      cart.map(item => {
 
         const price =
           Number(item.price) || 0;
@@ -1671,22 +937,143 @@
         const quantity =
           Number(item.quantity) || 0;
 
-        const itemTotal =
-          price *
-          quantity;
+        const subtotal =
+          price * quantity;
 
 
-        message +=
-          "• " +
-          item.name +
-          " × " +
-          quantity +
-          " = MVR " +
-          itemTotal.toFixed(2) +
-          "\n";
+        return `
 
-      }
-    );
+          <div class="cart-item">
+
+            <div class="cart-item-name">
+              ${escapeHtml(item.name)}
+            </div>
+
+            <div class="cart-item-price">
+              MVR ${price.toFixed(2)} each
+            </div>
+
+            <div class="cart-controls">
+
+              <button
+                class="quantity-btn"
+                onclick="changeCartQuantity(${item.id}, -1)"
+              >
+                −
+              </button>
+
+              <span class="quantity-number">
+                ${quantity}
+              </span>
+
+              <button
+                class="quantity-btn"
+                onclick="changeCartQuantity(${item.id}, 1)"
+              >
+                +
+              </button>
+
+              <button
+                class="remove-btn"
+                onclick="removeFromCart(${item.id})"
+              >
+                Remove
+              </button>
+
+            </div>
+
+            <div class="cart-subtotal">
+              Subtotal:
+              MVR ${subtotal.toFixed(2)}
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+
+    const total =
+      getCartTotal();
+
+
+    cartSummary.innerHTML = `
+
+      <div class="cart-total">
+        TOTAL:
+        MVR ${total.toFixed(2)}
+      </div>
+
+      <button
+        class="whatsapp-btn"
+        onclick="orderOnWhatsApp()"
+      >
+        📱 Order on WhatsApp
+      </button>
+
+    `;
+
+  }
+
+
+  /* =========================
+     SCROLL TO CART
+  ========================= */
+
+  function scrollToCart() {
+
+    document
+      .getElementById("cartSection")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  /* =========================
+     WHATSAPP ORDER
+  ========================= */
+
+  function orderOnWhatsApp() {
+
+    if (cart.length === 0) {
+
+      alert(
+        "Your cart is empty."
+      );
+
+      return;
+    }
+
+
+    let message =
+      "🥖 *KANBULO BAKERY ORDER*\n\n";
+
+
+    cart.forEach(item => {
+
+      const price =
+        Number(item.price) || 0;
+
+      const quantity =
+        Number(item.quantity) || 0;
+
+      const itemTotal =
+        price * quantity;
+
+
+      message +=
+        "• " +
+        item.name +
+        " × " +
+        quantity +
+        " = MVR " +
+        itemTotal.toFixed(2) +
+        "\n";
+
+    });
 
 
     const total =
@@ -1707,9 +1094,7 @@
       "https://wa.me/" +
       WHATSAPP_NUMBER +
       "?text=" +
-      encodeURIComponent(
-        message
-      );
+      encodeURIComponent(message);
 
 
     window.open(
@@ -1720,63 +1105,533 @@
   }
 
 
-  /* ================================
-     IMAGE PREVIEW
-  ================================= */
+  /* =========================
+     LOAD PRODUCTS
+  ========================= */
 
-  function previewImage(
-    event
-  ) {
+  async function loadProducts() {
 
-    selectedImageFile =
-      event.target.files[0] ||
-      null;
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("products")
+        .select("*")
+        .order("id", {
+          ascending: true
+        });
 
 
-    const preview =
-      document.getElementById(
-        "imagePreview"
+    if (error) {
+
+      console.error(error);
+
+      showStatus(
+        "Could not load products.",
+        true
       );
 
-
-    if (
-      selectedImageFile
-    ) {
-
-      preview.src =
-        URL.createObjectURL(
-          selectedImageFile
-        );
-
-      preview.style.display =
-        "block";
-
-    } else {
-
-      preview.src = "";
-
-      preview.style.display =
-        "none";
-
+      return;
     }
+
+
+    products =
+      data || [];
+
+
+    displayProducts();
 
   }
 
 
-  /* ================================
+  /* =========================
+     DISPLAY PRODUCTS
+  ========================= */
+
+  function displayProducts() {
+
+    const container =
+      document.getElementById(
+        "products"
+      );
+
+
+    const searchValue =
+      document
+        .getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+      products.filter(product => {
+
+        const matchesCategory =
+          selectedCategory === "All" ||
+          product.category ===
+          selectedCategory;
+
+
+        const matchesSearch =
+          String(product.name || "")
+            .toLowerCase()
+            .includes(searchValue) ||
+
+          String(product.category || "")
+            .toLowerCase()
+            .includes(searchValue);
+
+
+        return (
+          matchesCategory &&
+          matchesSearch
+        );
+
+      });
+
+
+    if (filtered.length === 0) {
+
+      container.innerHTML = `
+        <p>
+          No products found.
+        </p>
+      `;
+
+      return;
+    }
+
+
+    container.innerHTML =
+      filtered.map(product => {
+
+        const availability =
+          product.available !== false;
+
+
+        const imageUrl =
+          product.image_url ||
+          "";
+
+
+        let imageHtml = "";
+
+        if (imageUrl) {
+
+          imageHtml = `
+            <img
+              class="product-image"
+              src="${escapeHtml(imageUrl)}"
+              alt="${escapeHtml(product.name)}"
+            >
+          `;
+
+        } else {
+
+          imageHtml = `
+            <div
+              class="product-image"
+              style="
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:50px;
+              "
+            >
+              🥖
+            </div>
+          `;
+
+        }
+
+
+        /*
+          IMPORTANT:
+
+          Add to Cart is now shown
+          even for the admin.
+
+          Previously this had:
+          availability && !isAdmin
+
+          We changed it to:
+          availability
+        */
+
+        let cartButton = "";
+
+
+        if (availability) {
+
+          cartButton = `
+
+            <button
+              class="add-cart-btn"
+              onclick="addToCart(${product.id})"
+            >
+              🛍️ Add to Cart
+            </button>
+
+          `;
+
+        }
+
+
+        let adminButtons = "";
+
+
+        if (isAdmin) {
+
+          adminButtons = `
+
+            <div class="card-buttons">
+
+              <button
+                class="edit-btn"
+                onclick="editProduct(${product.id})"
+              >
+                ✏️ Edit
+              </button>
+
+              <button
+                class="hide-btn"
+                onclick="toggleAvailability(
+                  ${product.id},
+                  ${availability}
+                )"
+              >
+                ${
+                  availability
+                    ? "🙈 Hide"
+                    : "👁️ Show"
+                }
+              </button>
+
+              <button
+                class="delete-btn"
+                onclick="deleteProduct(${product.id})"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          `;
+
+        }
+
+
+        return `
+
+          <div class="product-card">
+
+            ${imageHtml}
+
+            <div class="product-info">
+
+              <div class="product-name">
+                ${escapeHtml(product.name)}
+              </div>
+
+              <div class="product-category">
+                ${escapeHtml(product.category || "")}
+              </div>
+
+              <div class="product-price">
+                MVR ${
+                  Number(product.price || 0)
+                    .toFixed(2)
+                }
+              </div>
+
+              <div class="${
+                availability
+                  ? "available"
+                  : "unavailable"
+              }">
+
+                ${
+                  availability
+                    ? "Available"
+                    : "Currently unavailable"
+                }
+
+              </div>
+
+            </div>
+
+            ${cartButton}
+
+            ${adminButtons}
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }
+
+
+  /* =========================
+     CATEGORY FILTER
+  ========================= */
+
+  function filterCategory(
+    category,
+    button
+  ) {
+
+    selectedCategory =
+      category;
+
+
+    document
+      .querySelectorAll(
+        ".category-buttons button"
+      )
+      .forEach(btn => {
+
+        btn.classList.remove(
+          "active"
+        );
+
+      });
+
+
+    button.classList.add(
+      "active"
+    );
+
+
+    displayProducts();
+
+  }
+
+
+  /* =========================
+     SHOW STATUS
+  ========================= */
+
+  function showStatus(
+    message,
+    error = false
+  ) {
+
+    const box =
+      document.getElementById(
+        "statusMessage"
+      );
+
+
+    box.textContent =
+      message;
+
+    box.style.display =
+      "block";
+
+    box.style.background =
+      error
+        ? "#f8d7da"
+        : "#d4edda";
+
+
+    setTimeout(() => {
+
+      box.style.display =
+        "none";
+
+    }, 4000);
+
+  }
+
+
+  /* =========================
+     ADMIN LOGIN
+  ========================= */
+
+  async function loginAdmin() {
+
+    const email =
+      prompt(
+        "Enter admin email:"
+      );
+
+
+    if (!email) return;
+
+
+    const password =
+      prompt(
+        "Enter admin password:"
+      );
+
+
+    if (!password) return;
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+
+    if (error) {
+
+      alert(
+        "Login failed: " +
+        error.message
+      );
+
+      return;
+    }
+
+
+    if (
+      !data.user ||
+      data.user.id !==
+      ADMIN_USER_ID
+    ) {
+
+      await supabaseClient.auth.signOut();
+
+      alert(
+        "This account is not authorized as administrator."
+      );
+
+      return;
+    }
+
+
+    await setAdminUI();
+
+    alert(
+      "Admin login successful!"
+    );
+
+  }
+
+
+  /* =========================
+     LOGOUT
+  ========================= */
+
+  async function logoutAdmin() {
+
+    await supabaseClient.auth.signOut();
+
+    isAdmin = false;
+
+    editingProductId = null;
+
+    setAdminUI();
+
+    displayProducts();
+
+  }
+
+
+  /* =========================
+     ADMIN UI
+  ========================= */
+
+  async function setAdminUI() {
+
+    const {
+      data
+    } =
+      await supabaseClient.auth.getUser();
+
+
+    const user =
+      data?.user || null;
+
+
+    isAdmin =
+      !!user &&
+      user.id ===
+      ADMIN_USER_ID;
+
+
+    const adminPanel =
+      document.getElementById(
+        "adminPanel"
+      );
+
+
+    const loginButton =
+      document.getElementById(
+        "loginButton"
+      );
+
+
+    const logoutButton =
+      document.getElementById(
+        "logoutButton"
+      );
+
+
+    const loginMessage =
+      document.getElementById(
+        "loginMessage"
+      );
+
+
+    if (isAdmin) {
+
+      adminPanel.style.display =
+        "block";
+
+      loginButton.style.display =
+        "none";
+
+      logoutButton.style.display =
+        "inline-block";
+
+      loginMessage.style.display =
+        "block";
+
+    } else {
+
+      adminPanel.style.display =
+        "none";
+
+      loginButton.style.display =
+        "inline-block";
+
+      logoutButton.style.display =
+        "none";
+
+      loginMessage.style.display =
+        "none";
+
+    }
+
+
+    displayProducts();
+
+  }
+
+
+  /* =========================
      SAVE PRODUCT
-  ================================= */
+  ========================= */
 
   async function saveProduct() {
 
     if (!isAdmin) {
 
       alert(
-        "Admin login required."
+        "Admin access required."
       );
 
       return;
-
     }
 
 
@@ -1789,20 +1644,22 @@
         .trim();
 
 
-    const price =
-      document
-        .getElementById(
-          "productPrice"
-        )
-        .value;
-
-
     const category =
       document
         .getElementById(
           "productCategory"
         )
         .value;
+
+
+    const price =
+      Number(
+        document
+          .getElementById(
+            "productPrice"
+          )
+          .value
+      );
 
 
     const description =
@@ -1814,52 +1671,52 @@
         .trim();
 
 
-    const message =
-      document.getElementById(
-        "message"
+    const imageFile =
+      document
+        .getElementById(
+          "productImage"
+        )
+        .files[0];
+
+
+    if (!name) {
+
+      alert(
+        "Please enter product name."
       );
 
-
-    if (
-      !name ||
-      !price
-    ) {
-
-      message.style.color =
-        "red";
-
-      message.textContent =
-        "Please enter product name and price.";
-
       return;
-
     }
 
 
-    message.style.color =
-      "#8b4513";
+    if (
+      isNaN(price) ||
+      price < 0
+    ) {
 
-    message.textContent =
-      "Saving product...";
+      alert(
+        "Please enter a valid price."
+      );
+
+      return;
+    }
 
 
     let imageUrl = null;
 
 
-    /* UPLOAD IMAGE */
+    /* IMAGE UPLOAD */
 
-    if (
-      selectedImageFile
-    ) {
+    if (imageFile) {
 
       const fileName =
         Date.now() +
-        "-" +
-        Math.random()
-          .toString(36)
-          .substring(2) +
-        "-" +
-        selectedImageFile.name;
+        "_" +
+        imageFile.name
+          .replace(
+            /[^a-zA-Z0-9._-]/g,
+            "_"
+          );
 
 
       const {
@@ -1870,30 +1727,26 @@
           .from("product-images")
           .upload(
             fileName,
-            selectedImageFile
+            imageFile,
+            {
+              upsert: false
+            }
           );
 
 
       if (uploadError) {
 
-        console.error(
-          uploadError
+        alert(
+          "Image upload failed: " +
+          uploadError.message
         );
 
-        message.style.color =
-          "red";
-
-        message.textContent =
-          "Image upload failed: " +
-          uploadError.message;
-
         return;
-
       }
 
 
       const {
-        data: publicUrlData
+        data: publicData
       } =
         supabaseClient
           .storage
@@ -1904,25 +1757,22 @@
 
 
       imageUrl =
-        publicUrlData.publicUrl;
+        publicData.publicUrl;
 
     }
 
 
-    /* EDIT PRODUCT */
+    /* EDIT EXISTING */
 
-    if (
-      editingId !== null
-    ) {
+    if (editingProductId) {
 
       const updateData = {
 
         name: name,
 
-        price:
-          Number(price),
-
         category: category,
+
+        price: price,
 
         description:
           description
@@ -1943,61 +1793,45 @@
       } =
         await supabaseClient
           .from("products")
-          .update(
-            updateData
-          )
+          .update(updateData)
           .eq(
             "id",
-            editingId
+            editingProductId
           );
 
 
       if (error) {
 
-        console.error(
-          error
+        alert(
+          "Update failed: " +
+          error.message
         );
 
-        message.style.color =
-          "red";
-
-        message.textContent =
-          "Update failed: " +
-          error.message;
-
         return;
-
       }
 
 
-      message.style.color =
-        "green";
-
-      message.textContent =
-        "Product updated successfully!";
-
-    }
+      alert(
+        "Product updated successfully!"
+      );
 
 
-    /* ADD PRODUCT */
+    } else {
 
-    else {
+      /* ADD NEW PRODUCT */
 
       const {
         error
       } =
         await supabaseClient
           .from("products")
-          .insert({
+          .insert([{
 
             name: name,
 
-            price:
-              Number(price),
+            category: category,
 
-            category:
-              category ||
-              "Other",
+            price: price,
 
             description:
               description,
@@ -2005,62 +1839,49 @@
             image_url:
               imageUrl,
 
-            available:
-              true
+            available: true
 
-          });
+          }]);
 
 
       if (error) {
 
-        console.error(
-          error
+        alert(
+          "Product could not be added: " +
+          error.message
         );
 
-        message.style.color =
-          "red";
-
-        message.textContent =
-          "Product could not be added: " +
-          error.message;
-
         return;
-
       }
 
 
-      message.style.color =
-        "green";
-
-      message.textContent =
-        "Product added successfully!";
+      alert(
+        "Product added successfully!"
+      );
 
     }
 
 
-    resetForm();
+    cancelEdit();
 
     await loadProducts();
 
   }
 
 
-  /* ================================
+  /* =========================
      EDIT PRODUCT
-  ================================= */
+  ========================= */
 
-  function editProduct(
-    id
-  ) {
+  function editProduct(productId) {
 
     if (!isAdmin) {
 
       alert(
-        "Admin login required."
+        "Admin access required."
       );
 
       return;
-
     }
 
 
@@ -2068,164 +1889,131 @@
       products.find(
         p =>
           String(p.id) ===
-          String(id)
+          String(productId)
       );
 
 
     if (!product) return;
 
 
-    editingId =
+    editingProductId =
       product.id;
 
 
-    document.getElementById(
-      "formTitle"
-    ).textContent =
-      "✏️ Edit Product";
-
-
-    document.getElementById(
-      "productName"
-    ).value =
+    document
+      .getElementById(
+        "productName"
+      )
+      .value =
       product.name || "";
 
 
-    document.getElementById(
-      "productPrice"
-    ).value =
+    document
+      .getElementById(
+        "productCategory"
+      )
+      .value =
+      product.category || "Bakery";
+
+
+    document
+      .getElementById(
+        "productPrice"
+      )
+      .value =
       product.price || "";
 
 
-    document.getElementById(
-      "productCategory"
-    ).value =
-      product.category ||
-      "Other";
+    document
+      .getElementById(
+        "productDescription"
+      )
+      .value =
+      product.description || "";
 
 
-    document.getElementById(
-      "productDescription"
-    ).value =
-      product.description ||
-      "";
+    document
+      .getElementById(
+        "productImage"
+      )
+      .value = "";
 
 
-    document.getElementById(
-      "cancelButton"
-    ).style.display =
-      "inline-block";
-
-
-    window.scrollTo({
-
-      top: 0,
-
-      behavior: "smooth"
-
-    });
+    document
+      .getElementById(
+        "adminPanel"
+      )
+      .scrollIntoView({
+        behavior: "smooth"
+      });
 
   }
 
 
-  /* ================================
-     RESET FORM
-  ================================= */
-
-  function resetForm() {
-
-    editingId =
-      null;
-
-    selectedImageFile =
-      null;
-
-
-    document.getElementById(
-      "productName"
-    ).value = "";
-
-
-    document.getElementById(
-      "productPrice"
-    ).value = "";
-
-
-    document.getElementById(
-      "productCategory"
-    ).value =
-      "Bakery";
-
-
-    document.getElementById(
-      "productDescription"
-    ).value = "";
-
-
-    document.getElementById(
-      "productImage"
-    ).value = "";
-
-
-    const preview =
-      document.getElementById(
-        "imagePreview"
-      );
-
-
-    preview.src = "";
-
-    preview.style.display =
-      "none";
-
-
-    document.getElementById(
-      "formTitle"
-    ).textContent =
-      "➕ Add Product";
-
-
-    document.getElementById(
-      "cancelButton"
-    ).style.display =
-      "none";
-
-  }
-
-
-  /* ================================
+  /* =========================
      CANCEL EDIT
-  ================================= */
+  ========================= */
 
   function cancelEdit() {
 
-    resetForm();
+    editingProductId =
+      null;
 
 
-    document.getElementById(
-      "message"
-    ).textContent = "";
+    document
+      .getElementById(
+        "productName"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "productCategory"
+      )
+      .value =
+      "Bakery";
+
+
+    document
+      .getElementById(
+        "productPrice"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "productDescription"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "productImage"
+      )
+      .value = "";
 
   }
 
 
-  /* ================================
-     HIDE / SHOW PRODUCT
-  ================================= */
+  /* =========================
+     TOGGLE AVAILABILITY
+  ========================= */
 
   async function toggleAvailability(
-    id,
-    currentAvailability
+    productId,
+    currentStatus
   ) {
 
     if (!isAdmin) {
 
       alert(
-        "Admin login required."
+        "Admin access required."
       );
 
       return;
-
     }
 
 
@@ -2235,26 +2023,23 @@
       await supabaseClient
         .from("products")
         .update({
-
           available:
-            !currentAvailability
-
+            !currentStatus
         })
         .eq(
           "id",
-          id
+          productId
         );
 
 
     if (error) {
 
       alert(
-        "Could not change availability: " +
+        "Could not update availability: " +
         error.message
       );
 
       return;
-
     }
 
 
@@ -2263,28 +2048,40 @@
   }
 
 
-  /* ================================
+  /* =========================
      DELETE PRODUCT
-  ================================= */
+  ========================= */
 
   async function deleteProduct(
-    id
+    productId
   ) {
 
     if (!isAdmin) {
 
       alert(
-        "Admin login required."
+        "Admin access required."
       );
 
       return;
-
     }
+
+
+    const product =
+      products.find(
+        p =>
+          String(p.id) ===
+          String(productId)
+      );
+
+
+    if (!product) return;
 
 
     const confirmed =
       confirm(
-        "Are you sure you want to delete this product?"
+        "Delete " +
+        product.name +
+        "?"
       );
 
 
@@ -2299,29 +2096,33 @@
         .delete()
         .eq(
           "id",
-          id
+          productId
         );
 
 
     if (error) {
 
       alert(
-        "Could not delete product: " +
+        "Delete failed: " +
         error.message
       );
 
       return;
-
     }
 
 
-    /* REMOVE DELETED PRODUCT FROM CART */
+    alert(
+      "Product deleted."
+    );
+
+
+    /* Remove from cart too */
 
     cart =
       cart.filter(
         item =>
           String(item.id) !==
-          String(id)
+          String(productId)
       );
 
 
@@ -2334,60 +2135,49 @@
   }
 
 
-  /* ================================
-     HTML SECURITY
-  ================================= */
+  /* =========================
+     INITIALIZE
+  ========================= */
 
-  function escapeHtml(
-    value
-  ) {
+  async function initialize() {
 
-    return String(value)
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
+    loadCart();
+
+    await loadProducts();
+
+    await setAdminUI();
 
   }
 
 
-  /* ================================
-     START WEBSITE
-  ================================= */
-
-  loadCart();
-
-  initAuth();
-
-  loadProducts();
-
-</script>
+  initialize();
 
 
-<script>
+  /* =========================
+     AUTH STATE
+  ========================= */
 
-  /* ================================
-     SERVICE WORKER
-  ================================= */
+  supabaseClient.auth.onAuthStateChange(
+    async () => {
+
+      setTimeout(
+        () => {
+          setAdminUI();
+        },
+        0
+      );
+
+    }
+  );
+
+
+  /* =========================
+     PWA SERVICE WORKER
+  ========================= */
 
   if (
-    "serviceWorker" in navigator
+    "serviceWorker" in
+    navigator
   ) {
 
     window.addEventListener(
@@ -2396,16 +2186,14 @@
 
         navigator.serviceWorker
           .register("./sw.js")
-          .catch(
-            error => {
+          .catch(error => {
 
-              console.log(
-                "Service worker registration failed:",
-                error
-              );
+            console.log(
+              "Service worker registration failed:",
+              error
+            );
 
-            }
-          );
+          });
 
       }
     );
@@ -2416,5 +2204,3 @@
 
 </body>
 </html>
-```
-
