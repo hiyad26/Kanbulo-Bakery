@@ -1,0 +1,21 @@
+{
+  "name": "Kanbulo Bakery",
+  "short_name": "Kanbulo",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff8f0",
+  "theme_color": "#8b4513",
+  "description": "Fresh bakery products from Kanbulo Bakery",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
