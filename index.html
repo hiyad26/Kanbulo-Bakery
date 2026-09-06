@@ -669,6 +669,79 @@
       border-color: var(--gold);
     }
 
+    /* PAYMENT SECTION */
+
+    .payment-section {
+      margin-top: 8px;
+      margin-bottom: 15px;
+      padding: 17px;
+      background: #faf7f4;
+      border: 1px solid #eadbd2;
+      border-radius: 9px;
+    }
+
+    .payment-section h3 {
+      color: var(--maroon);
+      font-size: 18px;
+      font-weight: normal;
+      margin: 0 0 12px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: white;
+      border: 1px solid #ddd0c8;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .payment-option:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .payment-option input {
+      width: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .bank-transfer-details {
+      margin-top: 12px;
+      padding: 15px;
+      background: white;
+      border-left: 4px solid var(--gold);
+      border-radius: 7px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .bank-transfer-details strong {
+      display: block;
+      color: var(--maroon);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .bank-transfer-details p {
+      margin: 10px 0 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .transfer-contacts {
+      color: var(--maroon);
+      font-weight: bold;
+      font-size: 14px;
+    }
+
     .whatsapp-btn {
       width: 100%;
       border: none;
@@ -816,6 +889,14 @@
 
       .category-manager-item button {
         flex: 1;
+      }
+
+      .payment-section {
+        padding: 14px;
+      }
+
+      .bank-transfer-details {
+        font-size: 12px;
       }
     }
 
@@ -1129,6 +1210,79 @@
           id="orderNotes"
           placeholder="Extra notes (optional)"
           rows="2"></textarea>
+
+
+        <!-- PAYMENT SECTION -->
+
+        <div class="payment-section">
+
+          <h3>Payment Method</h3>
+
+          <label class="payment-option">
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="Cash"
+              checked
+              onchange="togglePaymentDetails()">
+
+            <span>
+              💵 Cash
+            </span>
+
+          </label>
+
+
+          <label class="payment-option">
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="Bank Transfer"
+              onchange="togglePaymentDetails()">
+
+            <span>
+              🏦 Bank Transfer
+            </span>
+
+          </label>
+
+
+          <div
+            id="bankTransferDetails"
+            class="bank-transfer-details"
+            style="display:none;">
+
+            <strong>
+              Bank Transfer Details
+            </strong>
+
+            <div>
+              🏦 <b>Bank:</b> Bank of Maldives
+            </div>
+
+            <div>
+              👤 <b>Account Name:</b> KANBULO BAKERY
+            </div>
+
+            <div>
+              🔢 <b>Account Number:</b> 7770000049905
+            </div>
+
+            <p>
+              After making the transfer, please send your
+              transfer slip through Viber or WhatsApp:
+            </p>
+
+            <div class="transfer-contacts">
+              📱 7653140 &nbsp; | &nbsp; 7359040
+            </div>
+
+          </div>
+
+        </div>
+
 
         <button
           class="whatsapp-btn"
@@ -1561,11 +1715,6 @@
       return;
     }
 
-    /*
-      First update products that use
-      the old category name.
-    */
-
     const {
       error: productError
     } =
@@ -1592,10 +1741,6 @@
 
       return;
     }
-
-    /*
-      Then rename the category.
-    */
 
     const {
       error: categoryError
@@ -1671,11 +1816,6 @@
 
       return;
     }
-
-    /*
-      Check whether products are
-      currently using this category.
-    */
 
     const {
       data: productsUsingCategory,
@@ -2485,6 +2625,51 @@
   }
 
 
+  function togglePaymentDetails() {
+
+    const selected =
+      document.querySelector(
+        'input[name="paymentMethod"]:checked'
+      );
+
+    const details =
+      document.getElementById(
+        "bankTransferDetails"
+      );
+
+    if (!selected || !details) {
+      return;
+    }
+
+    if (
+      selected.value ===
+      "Bank Transfer"
+    ) {
+
+      details.style.display =
+        "block";
+
+    } else {
+
+      details.style.display =
+        "none";
+    }
+  }
+
+
+  function getPaymentMethod() {
+
+    const selected =
+      document.querySelector(
+        'input[name="paymentMethod"]:checked'
+      );
+
+    return selected
+      ? selected.value
+      : "Cash";
+  }
+
+
   function orderOnWhatsApp() {
 
     if (cart.length === 0) {
@@ -2535,6 +2720,10 @@
         .value
         .trim();
 
+    const paymentMethod =
+      getPaymentMethod();
+
+
     if (!name) {
 
       alert(
@@ -2565,23 +2754,34 @@
       return;
     }
 
+
     let message =
       "🥖 *KANBULO BAKERY ORDER*\n\n";
+
 
     message +=
       "👤 *Name:* " +
       name +
       "\n";
 
+
     message +=
       "📱 *Phone:* " +
       phone +
       "\n";
 
+
     message +=
       "📦 *Order type:* " +
       orderType +
       "\n";
+
+
+    message +=
+      "💳 *Payment method:* " +
+      paymentMethod +
+      "\n";
+
 
     if (address) {
 
@@ -2591,8 +2791,24 @@
         "\n";
     }
 
+
+    if (
+      paymentMethod ===
+      "Bank Transfer"
+    ) {
+
+      message +=
+        "🏦 *Bank:* Bank of Maldives\n" +
+        "👤 *Account name:* KANBULO BAKERY\n" +
+        "🔢 *Account number:* 7770000049905\n" +
+        "📄 *Transfer slip:* Customer will send via Viber/WhatsApp\n" +
+        "📱 *Slip contacts:* 7653140 / 7359040\n";
+    }
+
+
     message +=
       "\n*ORDER ITEMS:*\n";
+
 
     cart.forEach(item => {
 
@@ -2616,13 +2832,16 @@
 
     });
 
+
     const total =
       getCartTotal();
+
 
     message +=
       "\n💰 *TOTAL: MVR " +
       total.toFixed(2) +
       "*\n";
+
 
     if (notes) {
 
@@ -2632,8 +2851,10 @@
         "\n";
     }
 
+
     message +=
       "\n🙏 Thank you for ordering from Kanbulo Bakery!";
+
 
     const whatsappUrl =
       "https://wa.me/" +
@@ -2642,6 +2863,7 @@
       encodeURIComponent(
         message
       );
+
 
     window.open(
       whatsappUrl,
@@ -2704,6 +2926,7 @@
         )
         .files[0];
 
+
     if (!name) {
 
       alert(
@@ -2713,6 +2936,7 @@
       return;
     }
 
+
     if (!category) {
 
       alert(
@@ -2721,6 +2945,7 @@
 
       return;
     }
+
 
     if (
       isNaN(price) ||
@@ -2734,7 +2959,9 @@
       return;
     }
 
+
     let imageUrl = null;
+
 
     if (editingProductId) {
 
@@ -2749,6 +2976,7 @@
         existing?.image_url || null;
     }
 
+
     if (imageFile) {
 
       const fileName =
@@ -2759,6 +2987,7 @@
             /[^a-zA-Z0-9._-]/g,
             "_"
           );
+
 
       const {
         error: uploadError
@@ -2774,6 +3003,7 @@
             }
           );
 
+
       if (uploadError) {
 
         console.error(
@@ -2788,6 +3018,7 @@
         return;
       }
 
+
       const {
         data: publicData
       } =
@@ -2798,9 +3029,11 @@
             fileName
           );
 
+
       imageUrl =
         publicData.publicUrl;
     }
+
 
     const productData = {
 
@@ -2822,6 +3055,7 @@
         : {})
     };
 
+
     if (editingProductId) {
 
       const {
@@ -2837,6 +3071,7 @@
             editingProductId
           );
 
+
       if (error) {
 
         alert(
@@ -2846,9 +3081,11 @@
         return;
       }
 
+
       alert(
         "Product updated successfully."
       );
+
 
     } else {
 
@@ -2861,6 +3098,7 @@
           productData
         );
 
+
       if (error) {
 
         alert(
@@ -2870,10 +3108,12 @@
         return;
       }
 
+
       alert(
         "Product added successfully."
       );
     }
+
 
     cancelEdit();
 
@@ -2885,6 +3125,7 @@
 
     if (!isAdmin) return;
 
+
     const product =
       products.find(
         p =>
@@ -2892,42 +3133,52 @@
           String(productId)
       );
 
+
     if (!product) return;
+
 
     editingProductId =
       product.id;
+
 
     document.getElementById(
       "formTitle"
     ).textContent =
       "Edit Product";
 
+
     document.getElementById(
       "productName"
     ).value =
       product.name || "";
 
+
     populateCategorySelect();
+
 
     document.getElementById(
       "productCategory"
     ).value =
       product.category || "";
 
+
     document.getElementById(
       "productPrice"
     ).value =
       product.price || "";
+
 
     document.getElementById(
       "productDescription"
     ).value =
       product.description || "";
 
+
     document.getElementById(
       "cancelEditButton"
     ).style.display =
       "block";
+
 
     document.getElementById(
       "adminPanel"
@@ -2942,35 +3193,42 @@
     editingProductId =
       null;
 
+
     document.getElementById(
       "formTitle"
     ).textContent =
       "Add Product";
+
 
     document.getElementById(
       "productName"
     ).value =
       "";
 
+
     document.getElementById(
       "productPrice"
     ).value =
       "";
+
 
     document.getElementById(
       "productDescription"
     ).value =
       "";
 
+
     document.getElementById(
       "productImage"
     ).value =
       "";
 
+
     document.getElementById(
       "cancelEditButton"
     ).style.display =
       "none";
+
 
     if (categories.length > 0) {
 
@@ -2996,6 +3254,7 @@
       return;
     }
 
+
     const {
       error
     } =
@@ -3010,6 +3269,7 @@
           productId
         );
 
+
     if (error) {
 
       alert(
@@ -3018,6 +3278,7 @@
 
       return;
     }
+
 
     await loadProducts();
   }
@@ -3036,6 +3297,7 @@
       return;
     }
 
+
     const product =
       products.find(
         p =>
@@ -3043,7 +3305,9 @@
           String(productId)
       );
 
+
     if (!product) return;
+
 
     const confirmDelete =
       confirm(
@@ -3052,9 +3316,11 @@
         "?"
       );
 
+
     if (!confirmDelete) {
       return;
     }
+
 
     const {
       error
@@ -3067,6 +3333,7 @@
           productId
         );
 
+
     if (error) {
 
       alert(
@@ -3076,11 +3343,14 @@
       return;
     }
 
+
     removeFromCart(
       productId
     );
 
+
     await loadProducts();
+
 
     alert(
       "Product deleted."
@@ -3165,6 +3435,8 @@
     await loadProducts();
 
     toggleAddress();
+
+    togglePaymentDetails();
   }
 
 
