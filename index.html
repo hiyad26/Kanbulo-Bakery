@@ -406,6 +406,103 @@
       background: var(--dark-maroon);
     }
 
+    /* CATEGORY MANAGER */
+
+    .category-manager {
+      margin-top: 28px;
+      padding-top: 25px;
+      border-top: 1px solid #eadbd2;
+    }
+
+    .category-manager h3 {
+      color: var(--maroon);
+      font-size: 21px;
+      font-weight: normal;
+      margin: 0 0 6px;
+    }
+
+    .category-manager-description {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 0 0 15px;
+    }
+
+    .add-category-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .add-category-row input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .add-category-btn {
+      background: var(--maroon);
+      color: white;
+      border: none;
+      border-radius: 7px;
+      padding: 0 18px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .add-category-btn:hover {
+      background: var(--dark-maroon);
+    }
+
+    .category-manager-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .category-manager-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      background: #faf7f4;
+      border: 1px solid #eadbd2;
+      border-radius: 8px;
+    }
+
+    .category-manager-name {
+      flex: 1;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .category-manager-item button {
+      border: none;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 11px;
+    }
+
+    .rename-category-btn {
+      background: #eee8e4;
+      color: #443b38;
+    }
+
+    .delete-category-btn {
+      background: #b84b4b;
+      color: white;
+    }
+
+    .category-note {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+
     .admin-actions {
       display: flex;
       gap: 5px;
@@ -697,6 +794,28 @@
         width: 100%;
         justify-content: flex-end;
       }
+
+      .add-category-row {
+        flex-direction: column;
+      }
+
+      .add-category-btn {
+        width: 100%;
+        padding: 11px;
+      }
+
+      .category-manager-item {
+        flex-wrap: wrap;
+      }
+
+      .category-manager-name {
+        width: 100%;
+        flex-basis: 100%;
+      }
+
+      .category-manager-item button {
+        flex: 1;
+      }
     }
 
     @media (max-width: 390px) {
@@ -834,12 +953,7 @@
       placeholder="Product name">
 
     <select id="productCategory">
-      <option value="Bakery">Bakery</option>
-      <option value="Bread">Bread</option>
-      <option value="Buns">Buns</option>
-      <option value="Cakes">Cakes</option>
-      <option value="Snacks">Snacks</option>
-      <option value="Desserts">Desserts</option>
+      <option value="">Loading categories...</option>
     </select>
 
     <input
@@ -871,6 +985,47 @@
       Cancel Edit
     </button>
 
+    <!-- CATEGORY MANAGEMENT -->
+
+    <div class="category-manager">
+
+      <h3>
+        Manage Categories
+      </h3>
+
+      <p class="category-manager-description">
+        Add new main headings such as Cookies, Pastries, Birthday Cakes,
+        Savouries, Drinks, or any other category you need.
+      </p>
+
+      <div class="add-category-row">
+
+        <input
+          type="text"
+          id="newCategoryName"
+          placeholder="Enter new category name"
+          maxlength="50">
+
+        <button
+          class="add-category-btn"
+          onclick="addCategory()">
+          + Add Category
+        </button>
+
+      </div>
+
+      <div
+        id="categoryManagerList"
+        class="category-manager-list">
+      </div>
+
+      <div class="category-note">
+        Note: A category cannot be deleted while products are using it.
+        Rename a category instead if you want to keep those products together.
+      </div>
+
+    </div>
+
   </div>
 
   <div class="section-title">
@@ -894,48 +1049,14 @@
 
   </div>
 
-  <div class="categories">
+  <div
+    id="categories"
+    class="categories">
 
     <button
       class="category-btn active"
       onclick="setCategory('All', this)">
       All
-    </button>
-
-    <button
-      class="category-btn"
-      onclick="setCategory('Bakery', this)">
-      Bakery
-    </button>
-
-    <button
-      class="category-btn"
-      onclick="setCategory('Bread', this)">
-      Bread
-    </button>
-
-    <button
-      class="category-btn"
-      onclick="setCategory('Buns', this)">
-      Buns
-    </button>
-
-    <button
-      class="category-btn"
-      onclick="setCategory('Cakes', this)">
-      Cakes
-    </button>
-
-    <button
-      class="category-btn"
-      onclick="setCategory('Snacks', this)">
-      Snacks
-    </button>
-
-    <button
-      class="category-btn"
-      onclick="setCategory('Desserts', this)">
-      Desserts
     </button>
 
   </div>
@@ -1054,6 +1175,8 @@
 
   let products = [];
 
+  let categories = [];
+
   let cart =
     JSON.parse(
       localStorage.getItem("kanbuloCart") || "[]"
@@ -1066,6 +1189,592 @@
   let isAdmin = false;
 
   let editingProductId = null;
+
+
+  /* =========================
+     CATEGORY FUNCTIONS
+     ========================= */
+
+  async function loadCategories() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("categories")
+        .select("*")
+        .order("id", {
+          ascending: true
+        });
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "Could not load categories: " +
+        error.message
+      );
+
+      return;
+    }
+
+    categories =
+      data || [];
+
+    renderCategoryButtons();
+
+    populateCategorySelect();
+
+    renderCategoryManager();
+  }
+
+
+  function renderCategoryButtons() {
+
+    const container =
+      document.getElementById(
+        "categories"
+      );
+
+    if (!container) return;
+
+    let html = `
+
+      <button
+        class="category-btn ${selectedCategory === "All" ? "active" : ""}"
+        onclick="setCategory('All', this)">
+        All
+      </button>
+
+    `;
+
+    categories.forEach(category => {
+
+      const name =
+        category.name;
+
+      html += `
+
+        <button
+          class="category-btn ${selectedCategory === name ? "active" : ""}"
+          onclick="setCategoryByName('${escapeJs(name)}', this)">
+          ${escapeHtml(name)}
+        </button>
+
+      `;
+
+    });
+
+    container.innerHTML =
+      html;
+  }
+
+
+  function setCategoryByName(
+    category,
+    button
+  ) {
+
+    setCategory(
+      category,
+      button
+    );
+  }
+
+
+  function populateCategorySelect() {
+
+    const select =
+      document.getElementById(
+        "productCategory"
+      );
+
+    if (!select) return;
+
+    const currentValue =
+      select.value;
+
+    if (categories.length === 0) {
+
+      select.innerHTML =
+        `
+          <option value="">
+            No categories available
+          </option>
+        `;
+
+      return;
+    }
+
+    select.innerHTML =
+      categories
+        .map(category => {
+
+          return `
+            <option value="${escapeHtml(category.name)}">
+              ${escapeHtml(category.name)}
+            </option>
+          `;
+
+        })
+        .join("");
+
+    const stillExists =
+      categories.some(
+        category =>
+          category.name ===
+          currentValue
+      );
+
+    if (stillExists) {
+
+      select.value =
+        currentValue;
+
+    }
+  }
+
+
+  function renderCategoryManager() {
+
+    const container =
+      document.getElementById(
+        "categoryManagerList"
+      );
+
+    if (!container) return;
+
+    if (!isAdmin) {
+
+      container.innerHTML = "";
+
+      return;
+    }
+
+    if (categories.length === 0) {
+
+      container.innerHTML =
+        `
+          <div style="
+            font-family:Arial,sans-serif;
+            color:#827775;
+            font-size:12px;
+            padding:10px 0;">
+            No categories found.
+          </div>
+        `;
+
+      return;
+    }
+
+    container.innerHTML =
+      categories
+        .map(category => {
+
+          return `
+
+            <div class="category-manager-item">
+
+              <div class="category-manager-name">
+                ${escapeHtml(category.name)}
+              </div>
+
+              <button
+                class="rename-category-btn"
+                onclick="renameCategory('${category.id}')">
+                ✏️ Rename
+              </button>
+
+              <button
+                class="delete-category-btn"
+                onclick="deleteCategory('${category.id}')">
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+  }
+
+
+  async function addCategory() {
+
+    if (!isAdmin) {
+
+      alert(
+        "Admin access required."
+      );
+
+      return;
+    }
+
+    const input =
+      document.getElementById(
+        "newCategoryName"
+      );
+
+    const name =
+      input.value.trim();
+
+    if (!name) {
+
+      alert(
+        "Please enter a category name."
+      );
+
+      input.focus();
+
+      return;
+    }
+
+    const duplicate =
+      categories.some(
+        category =>
+          category.name.toLowerCase() ===
+          name.toLowerCase()
+      );
+
+    if (duplicate) {
+
+      alert(
+        "This category already exists."
+      );
+
+      input.focus();
+
+      return;
+    }
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("categories")
+        .insert({
+          name: name
+        });
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "Could not add category: " +
+        error.message
+      );
+
+      return;
+    }
+
+    input.value = "";
+
+    await loadCategories();
+
+    alert(
+      "Category added successfully."
+    );
+  }
+
+
+  async function renameCategory(
+    categoryId
+  ) {
+
+    if (!isAdmin) {
+
+      alert(
+        "Admin access required."
+      );
+
+      return;
+    }
+
+    const category =
+      categories.find(
+        item =>
+          String(item.id) ===
+          String(categoryId)
+      );
+
+    if (!category) {
+
+      alert(
+        "Category not found."
+      );
+
+      return;
+    }
+
+    const newName =
+      prompt(
+        "Enter the new name for \"" +
+        category.name +
+        "\":",
+        category.name
+      );
+
+    if (newName === null) {
+      return;
+    }
+
+    const trimmedName =
+      newName.trim();
+
+    if (!trimmedName) {
+
+      alert(
+        "Category name cannot be empty."
+      );
+
+      return;
+    }
+
+    if (
+      trimmedName.toLowerCase() ===
+      category.name.toLowerCase()
+    ) {
+
+      return;
+    }
+
+    const duplicate =
+      categories.some(
+        item =>
+          String(item.id) !==
+          String(categoryId) &&
+          item.name.toLowerCase() ===
+          trimmedName.toLowerCase()
+      );
+
+    if (duplicate) {
+
+      alert(
+        "Another category already has this name."
+      );
+
+      return;
+    }
+
+    /*
+      First update products that use
+      the old category name.
+    */
+
+    const {
+      error: productError
+    } =
+      await supabaseClient
+        .from("products")
+        .update({
+          category: trimmedName
+        })
+        .eq(
+          "category",
+          category.name
+        );
+
+    if (productError) {
+
+      console.error(
+        productError
+      );
+
+      alert(
+        "Could not update products: " +
+        productError.message
+      );
+
+      return;
+    }
+
+    /*
+      Then rename the category.
+    */
+
+    const {
+      error: categoryError
+    } =
+      await supabaseClient
+        .from("categories")
+        .update({
+          name: trimmedName
+        })
+        .eq(
+          "id",
+          categoryId
+        );
+
+    if (categoryError) {
+
+      console.error(
+        categoryError
+      );
+
+      alert(
+        "Could not rename category: " +
+        categoryError.message
+      );
+
+      return;
+    }
+
+    if (
+      selectedCategory ===
+      category.name
+    ) {
+
+      selectedCategory =
+        trimmedName;
+    }
+
+    await loadCategories();
+
+    await loadProducts();
+
+    alert(
+      "Category renamed successfully."
+    );
+  }
+
+
+  async function deleteCategory(
+    categoryId
+  ) {
+
+    if (!isAdmin) {
+
+      alert(
+        "Admin access required."
+      );
+
+      return;
+    }
+
+    const category =
+      categories.find(
+        item =>
+          String(item.id) ===
+          String(categoryId)
+      );
+
+    if (!category) {
+
+      alert(
+        "Category not found."
+      );
+
+      return;
+    }
+
+    /*
+      Check whether products are
+      currently using this category.
+    */
+
+    const {
+      data: productsUsingCategory,
+      error: checkError
+    } =
+      await supabaseClient
+        .from("products")
+        .select("id")
+        .eq(
+          "category",
+          category.name
+        );
+
+    if (checkError) {
+
+      console.error(
+        checkError
+      );
+
+      alert(
+        "Could not check products: " +
+        checkError.message
+      );
+
+      return;
+    }
+
+    if (
+      productsUsingCategory &&
+      productsUsingCategory.length > 0
+    ) {
+
+      alert(
+        "You cannot delete \"" +
+        category.name +
+        "\" because " +
+        productsUsingCategory.length +
+        " product(s) are using this category.\n\n" +
+        "Please rename the category instead, or edit those products first."
+      );
+
+      return;
+    }
+
+    const confirmDelete =
+      confirm(
+        "Delete category \"" +
+        category.name +
+        "\"?"
+      );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("categories")
+        .delete()
+        .eq(
+          "id",
+          categoryId
+        );
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "Could not delete category: " +
+        error.message
+      );
+
+      return;
+    }
+
+    if (
+      selectedCategory ===
+      category.name
+    ) {
+
+      selectedCategory =
+        "All";
+    }
+
+    await loadCategories();
+
+    renderProducts();
+
+    alert(
+      "Category deleted successfully."
+    );
+  }
+
+
+  /* =========================
+     PRODUCT FUNCTIONS
+     ========================= */
 
   async function loadProducts() {
 
@@ -1091,12 +1800,14 @@
       return;
     }
 
-    products = data || [];
+    products =
+      data || [];
 
     renderProducts();
 
     renderCart();
   }
+
 
   async function checkUser() {
 
@@ -1116,6 +1827,7 @@
 
     updateAdminUI();
   }
+
 
   function updateAdminUI() {
 
@@ -1146,8 +1858,11 @@
         "none";
     }
 
+    renderCategoryManager();
+
     renderProducts();
   }
+
 
   function showLogin() {
 
@@ -1178,11 +1893,13 @@
         : "block";
 
     if (box.style.display === "block") {
+
       box.scrollIntoView({
         behavior: "smooth"
       });
     }
   }
+
 
   async function loginAdmin() {
 
@@ -1260,6 +1977,7 @@
     );
   }
 
+
   async function logoutAdmin() {
 
     await supabaseClient.auth.signOut();
@@ -1270,6 +1988,7 @@
 
     updateAdminUI();
   }
+
 
   function setCategory(
     category,
@@ -1284,9 +2003,11 @@
         ".category-btn"
       )
       .forEach(btn => {
+
         btn.classList.remove(
           "active"
         );
+
       });
 
     button.classList.add(
@@ -1295,6 +2016,7 @@
 
     renderProducts();
   }
+
 
   function renderProducts() {
 
@@ -1321,7 +2043,7 @@
 
         const matchesSearch =
           !search ||
-          product.name
+          (product.name || "")
             .toLowerCase()
             .includes(search) ||
           (product.category || "")
@@ -1453,6 +2175,11 @@
         .join("");
   }
 
+
+  /* =========================
+     CART FUNCTIONS
+     ========================= */
+
   function addToCart(productId) {
 
     const product =
@@ -1514,6 +2241,7 @@
     scrollToCart();
   }
 
+
   function changeCartQuantity(
     productId,
     change
@@ -1547,6 +2275,7 @@
     renderCart();
   }
 
+
   function removeFromCart(
     productId
   ) {
@@ -1563,6 +2292,7 @@
     renderCart();
   }
 
+
   function saveCart() {
 
     localStorage.setItem(
@@ -1570,6 +2300,7 @@
       JSON.stringify(cart)
     );
   }
+
 
   function getCartTotal() {
 
@@ -1589,6 +2320,7 @@
       0
     );
   }
+
 
   function renderCart() {
 
@@ -1710,6 +2442,7 @@
       getCartTotal().toFixed(2);
   }
 
+
   function scrollToCart() {
 
     document
@@ -1720,6 +2453,11 @@
         behavior: "smooth"
       });
   }
+
+
+  /* =========================
+     ORDER FUNCTIONS
+     ========================= */
 
   function toggleAddress() {
 
@@ -1744,6 +2482,7 @@
         "Delivery address / location";
     }
   }
+
 
   function orderOnWhatsApp() {
 
@@ -1909,6 +2648,11 @@
     );
   }
 
+
+  /* =========================
+     PRODUCT ADMIN FUNCTIONS
+     ========================= */
+
   async function saveProduct() {
 
     if (!isAdmin) {
@@ -1963,6 +2707,15 @@
 
       alert(
         "Please enter a product name."
+      );
+
+      return;
+    }
+
+    if (!category) {
+
+      alert(
+        "Please select a category."
       );
 
       return;
@@ -2126,6 +2879,7 @@
     await loadProducts();
   }
 
+
   function editProduct(productId) {
 
     if (!isAdmin) return;
@@ -2152,10 +2906,12 @@
     ).value =
       product.name || "";
 
+    populateCategorySelect();
+
     document.getElementById(
       "productCategory"
     ).value =
-      product.category || "Bakery";
+      product.category || "";
 
     document.getElementById(
       "productPrice"
@@ -2178,6 +2934,7 @@
       behavior: "smooth"
     });
   }
+
 
   function cancelEdit() {
 
@@ -2213,7 +2970,16 @@
       "cancelEditButton"
     ).style.display =
       "none";
+
+    if (categories.length > 0) {
+
+      document.getElementById(
+        "productCategory"
+      ).value =
+        categories[0].name;
+    }
   }
+
 
   async function toggleAvailability(
     productId,
@@ -2254,6 +3020,7 @@
 
     await loadProducts();
   }
+
 
   async function deleteProduct(
     productId
@@ -2319,6 +3086,11 @@
     );
   }
 
+
+  /* =========================
+     SECURITY / HTML HELPERS
+     ========================= */
+
   function escapeHtml(
     value
   ) {
@@ -2348,16 +3120,55 @@
       );
   }
 
+
+  function escapeJs(
+    value
+  ) {
+
+    return String(
+      value || ""
+    )
+      .replace(
+        /\\/g,
+        "\\\\"
+      )
+      .replace(
+        /'/g,
+        "\\'"
+      )
+      .replace(
+        /"/g,
+        '\\"'
+      )
+      .replace(
+        /\n/g,
+        "\\n"
+      )
+      .replace(
+        /\r/g,
+        "\\r"
+      );
+  }
+
+
+  /* =========================
+     START APP
+     ========================= */
+
   async function startApp() {
 
     await checkUser();
+
+    await loadCategories();
 
     await loadProducts();
 
     toggleAddress();
   }
 
+
   startApp();
+
 
   supabaseClient
     .auth
@@ -2376,8 +3187,14 @@
           ADMIN_USER_ID;
 
         updateAdminUI();
+
+        if (isAdmin) {
+
+          await loadCategories();
+        }
       }
     );
+
 
   if (
     "serviceWorker" in navigator
