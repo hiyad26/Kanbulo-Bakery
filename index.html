@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <link rel="manifest" href="manifest.json">
@@ -154,9 +154,158 @@
       border: none;
     }
 
+    /* =========================
+       ADVERTISING SLIDER
+       ========================= */
+
+    .advertising-section {
+      max-width: 1100px;
+      margin: 22px auto 0;
+      padding: 0 20px;
+    }
+
+    .ad-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      min-height: 250px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.20), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.12), transparent 30%),
+        linear-gradient(135deg, #6b1f2b 0%, #4b131d 55%, #7f3944 100%);
+      box-shadow: 0 10px 30px rgba(70,25,25,0.16);
+    }
+
+    .ad-slide {
+      display: none;
+      min-height: 250px;
+      padding: 38px 75px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      animation: adFade 0.7s ease;
+    }
+
+    .ad-slide.active {
+      display: flex;
+    }
+
+    @keyframes adFade {
+      from {
+        opacity: 0;
+        transform: translateX(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .ad-content {
+      max-width: 700px;
+    }
+
+    .ad-icon {
+      font-size: 48px;
+      margin-bottom: 8px;
+    }
+
+    .ad-small {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #f1d3b1;
+      margin-bottom: 8px;
+    }
+
+    .ad-slide h2 {
+      margin: 0;
+      font-size: 34px;
+      font-weight: normal;
+    }
+
+    .ad-slide p {
+      margin: 10px auto 18px;
+      max-width: 560px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .ad-button {
+      display: inline-block;
+      border: none;
+      background: white;
+      color: var(--maroon);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .ad-button:hover {
+      background: var(--light-cream);
+    }
+
+    .ad-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.45);
+      background: rgba(0,0,0,0.16);
+      color: white;
+      font-size: 20px;
+      z-index: 5;
+    }
+
+    .ad-arrow:hover {
+      background: rgba(0,0,0,0.30);
+    }
+
+    .ad-prev {
+      left: 15px;
+    }
+
+    .ad-next {
+      right: 15px;
+    }
+
+    .ad-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      z-index: 5;
+    }
+
+    .ad-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+    }
+
+    .ad-dot.active {
+      width: 22px;
+      border-radius: 10px;
+      background: white;
+    }
+
     .hero {
       text-align: center;
-      padding: 48px 20px 35px;
+      padding: 38px 20px 35px;
       background:
         radial-gradient(circle at top, #fff 0%, #fffaf5 55%, #f8eee7 100%);
       border-bottom: 1px solid #eadbd2;
@@ -813,8 +962,48 @@
         font-size: 11px;
       }
 
+      .advertising-section {
+        margin-top: 12px;
+        padding: 0 10px;
+      }
+
+      .ad-slider,
+      .ad-slide {
+        min-height: 230px;
+      }
+
+      .ad-slide {
+        padding: 30px 48px;
+      }
+
+      .ad-icon {
+        font-size: 38px;
+      }
+
+      .ad-slide h2 {
+        font-size: 26px;
+      }
+
+      .ad-slide p {
+        font-size: 12px;
+      }
+
+      .ad-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 17px;
+      }
+
+      .ad-prev {
+        left: 9px;
+      }
+
+      .ad-next {
+        right: 9px;
+      }
+
       .hero {
-        padding: 38px 18px 28px;
+        padding: 32px 18px 28px;
       }
 
       .hero h2 {
@@ -926,8 +1115,17 @@
       .product-image {
         height: 130px;
       }
+
+      .ad-slide h2 {
+        font-size: 23px;
+      }
+
+      .ad-slide p {
+        font-size: 11px;
+      }
     }
   </style>
+
 </head>
 
 <body>
@@ -935,44 +1133,236 @@
 <header>
   <div class="header-inner">
 
-    <div class="brand">
-      <div class="brand-icon">
-        <img
-          src="FB_IMG_1741208862178.jpg"
-          alt="Kanbulo Bakery Logo">
-      </div>
+```
+<div class="brand">
+  <div class="brand-icon">
+    <img
+      src="FB_IMG_1741208862178.jpg"
+      alt="Kanbulo Bakery Logo">
+  </div>
 
-      <div class="brand-text">
-        <h1>KANBULO BAKERY</h1>
-        <span>FRESHLY BAKED</span>
-      </div>
-    </div>
+  <div class="brand-text">
+    <h1>KANBULO BAKERY</h1>
+    <span>FRESHLY BAKED</span>
+  </div>
+</div>
 
-    <div class="header-actions">
+<div class="header-actions">
 
-      <button
-        class="header-btn cart-btn"
-        onclick="scrollToCart()">
-        🛒 Cart (<span id="cartCount">0</span>)
-      </button>
+  <button
+    class="header-btn cart-btn"
+    onclick="scrollToCart()">
+    🛒 Cart (<span id="cartCount">0</span>)
+  </button>
 
-      <button
-        class="header-btn admin-btn"
-        onclick="showLogin()">
-        Admin
-      </button>
+  <button
+    class="header-btn admin-btn"
+    onclick="showLogin()">
+    Admin
+  </button>
 
-      <button
-        id="logoutButton"
-        class="header-btn logout-btn"
-        style="display:none;"
-        onclick="logoutAdmin()">
-        Logout
-      </button>
+  <button
+    id="logoutButton"
+    class="header-btn logout-btn"
+    style="display:none;"
+    onclick="logoutAdmin()">
+    Logout
+  </button>
 
-    </div>
+</div>
+```
+
   </div>
 </header>
+
+<!-- =========================
+     ADVERTISING SLIDER
+     ========================= -->
+
+<section class="advertising-section">
+
+  <div
+    class="ad-slider"
+    id="adSlider">
+
+```
+<div class="ad-slide active">
+
+  <div class="ad-content">
+
+    <div class="ad-icon">
+      🎂
+    </div>
+
+    <div class="ad-small">
+      Kanbulo Bakery
+    </div>
+
+    <h2>
+      Beautiful Cakes for Every Celebration
+    </h2>
+
+    <p>
+      Make birthdays, weddings and special moments
+      sweeter with Kanbulo Bakery.
+    </p>
+
+    <button
+      class="ad-button"
+      onclick="scrollToProducts()">
+      Explore Cakes
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="ad-slide">
+
+  <div class="ad-content">
+
+    <div class="ad-icon">
+      🥐
+    </div>
+
+    <div class="ad-small">
+      Fresh Every Day
+    </div>
+
+    <h2>
+      Fresh Bakery Favourites
+    </h2>
+
+    <p>
+      Enjoy freshly prepared breads, buns, snacks,
+      desserts and more.
+    </p>
+
+    <button
+      class="ad-button"
+      onclick="scrollToProducts()">
+      Shop Now
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="ad-slide">
+
+  <div class="ad-content">
+
+    <div class="ad-icon">
+      🧃
+    </div>
+
+    <div class="ad-small">
+      New at Kanbulo
+    </div>
+
+    <h2>
+      Jugo Flavours
+    </h2>
+
+    <p>
+      Refresh yourself with delicious Jugo flavours.
+      Ask us about the flavours currently available.
+    </p>
+
+    <button
+      class="ad-button"
+      onclick="searchJugo()">
+      Find Jugo Flavours
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="ad-slide">
+
+  <div class="ad-content">
+
+    <div class="ad-icon">
+      📱
+    </div>
+
+    <div class="ad-small">
+      Easy Ordering
+    </div>
+
+    <h2>
+      Order Easily Through WhatsApp
+    </h2>
+
+    <p>
+      Add your favourites to the cart, choose your
+      payment method and send your order directly to us.
+    </p>
+
+    <button
+      class="ad-button"
+      onclick="scrollToProducts()">
+      Start Your Order
+    </button>
+
+  </div>
+
+</div>
+
+
+<button
+  class="ad-arrow ad-prev"
+  onclick="changeAd(-1)"
+  aria-label="Previous advertisement">
+  ‹
+</button>
+
+<button
+  class="ad-arrow ad-next"
+  onclick="changeAd(1)"
+  aria-label="Next advertisement">
+  ›
+</button>
+
+
+<div
+  class="ad-dots"
+  id="adDots">
+
+  <button
+    class="ad-dot active"
+    onclick="showAd(0)"
+    aria-label="Advertisement 1">
+  </button>
+
+  <button
+    class="ad-dot"
+    onclick="showAd(1)"
+    aria-label="Advertisement 2">
+  </button>
+
+  <button
+    class="ad-dot"
+    onclick="showAd(2)"
+    aria-label="Advertisement 3">
+  </button>
+
+  <button
+    class="ad-dot"
+    onclick="showAd(3)"
+    aria-label="Advertisement 4">
+  </button>
+
+</div>
+```
+
+  </div>
+
+</section>
 
 <section class="hero">
 
@@ -1000,23 +1390,25 @@
     class="login-box"
     style="display:none;">
 
-    <h3>Admin Login</h3>
+```
+<h3>Admin Login</h3>
 
-    <input
-      type="email"
-      id="loginEmail"
-      placeholder="Email">
+<input
+  type="email"
+  id="loginEmail"
+  placeholder="Email">
 
-    <input
-      type="password"
-      id="loginPassword"
-      placeholder="Password">
+<input
+  type="password"
+  id="loginPassword"
+  placeholder="Password">
 
-    <button
-      class="login-btn"
-      onclick="loginAdmin()">
-      Login
-    </button>
+<button
+  class="login-btn"
+  onclick="loginAdmin()">
+  Login
+</button>
+```
 
   </div>
 
@@ -1025,109 +1417,121 @@
     class="admin-panel"
     style="display:none;">
 
-    <h2 id="formTitle">
-      Add Product
-    </h2>
+```
+<h2 id="formTitle">
+  Add Product
+</h2>
+
+<input
+  type="text"
+  id="productName"
+  placeholder="Product name">
+
+<select id="productCategory">
+  <option value="">Loading categories...</option>
+</select>
+
+<input
+  type="number"
+  id="productPrice"
+  placeholder="Price"
+  step="0.01">
+
+<textarea
+  id="productDescription"
+  placeholder="Description"
+  rows="3"></textarea>
+
+<input
+  type="file"
+  id="productImage"
+  accept="image/*">
+
+<button
+  class="save-btn"
+  onclick="saveProduct()">
+  Save Product
+</button>
+
+<button
+  id="cancelEditButton"
+  style="display:none; margin-top:10px; width:100%; padding:10px; border:1px solid #ddd; background:white; border-radius:7px;"
+  onclick="cancelEdit()">
+  Cancel Edit
+</button>
+
+
+<!-- CATEGORY MANAGEMENT -->
+
+<div class="category-manager">
+
+  <h3>
+    Manage Categories
+  </h3>
+
+  <p class="category-manager-description">
+    Add new main headings such as Cookies, Pastries,
+    Birthday Cakes, Savouries, Drinks, Jugo Flavours,
+    or any other category you need.
+  </p>
+
+  <div class="add-category-row">
 
     <input
       type="text"
-      id="productName"
-      placeholder="Product name">
-
-    <select id="productCategory">
-      <option value="">Loading categories...</option>
-    </select>
-
-    <input
-      type="number"
-      id="productPrice"
-      placeholder="Price"
-      step="0.01">
-
-    <textarea
-      id="productDescription"
-      placeholder="Description"
-      rows="3"></textarea>
-
-    <input
-      type="file"
-      id="productImage"
-      accept="image/*">
+      id="newCategoryName"
+      placeholder="Enter new category name"
+      maxlength="50">
 
     <button
-      class="save-btn"
-      onclick="saveProduct()">
-      Save Product
+      class="add-category-btn"
+      onclick="addCategory()">
+      + Add Category
     </button>
-
-    <button
-      id="cancelEditButton"
-      style="display:none; margin-top:10px; width:100%; padding:10px; border:1px solid #ddd; background:white; border-radius:7px;"
-      onclick="cancelEdit()">
-      Cancel Edit
-    </button>
-
-    <!-- CATEGORY MANAGEMENT -->
-
-    <div class="category-manager">
-
-      <h3>
-        Manage Categories
-      </h3>
-
-      <p class="category-manager-description">
-        Add new main headings such as Cookies, Pastries, Birthday Cakes,
-        Savouries, Drinks, or any other category you need.
-      </p>
-
-      <div class="add-category-row">
-
-        <input
-          type="text"
-          id="newCategoryName"
-          placeholder="Enter new category name"
-          maxlength="50">
-
-        <button
-          class="add-category-btn"
-          onclick="addCategory()">
-          + Add Category
-        </button>
-
-      </div>
-
-      <div
-        id="categoryManagerList"
-        class="category-manager-list">
-      </div>
-
-      <div class="category-note">
-        Note: A category cannot be deleted while products are using it.
-        Rename a category instead if you want to keep those products together.
-      </div>
-
-    </div>
 
   </div>
 
-  <div class="section-title">
+  <div
+    id="categoryManagerList"
+    class="category-manager-list">
+  </div>
 
-    <h3>Our Fresh Favourites</h3>
+  <div class="category-note">
+    Note: A category cannot be deleted while products are using it.
+    Rename a category instead if you want to keep those products together.
+  </div>
 
-    <p>
-      Browse our freshly prepared bakery selection
-    </p>
+</div>
+```
+
+  </div>
+
+  <div
+    id="productsSection"
+    class="section-title">
+
+```
+<h3>
+  Our Fresh Favourites
+</h3>
+
+<p>
+  Browse our freshly prepared bakery selection
+</p>
+```
 
   </div>
 
   <div class="search-wrap">
 
-    <input
-      type="text"
-      id="searchInput"
-      class="search-box"
-      placeholder="🔍  Search bakery items..."
-      oninput="renderProducts()">
+```
+<input
+  type="text"
+  id="searchInput"
+  class="search-box"
+  placeholder="🔍  Search bakery items..."
+  oninput="renderProducts()">
+```
 
   </div>
 
@@ -1135,11 +1539,13 @@
     id="categories"
     class="categories">
 
-    <button
-      class="category-btn active"
-      onclick="setCategory('All', this)">
-      All
-    </button>
+```
+<button
+  class="category-btn active"
+  onclick="setCategory('All', this)">
+  All
+</button>
+```
 
   </div>
 
@@ -1152,147 +1558,156 @@
     id="cartSection"
     class="cart-section">
 
-    <div class="cart-heading">
+```
+<div class="cart-heading">
 
-      <h2>Your Cart</h2>
+  <h2>
+    Your Cart
+  </h2>
 
-      <p>
-        Review your order before sending it to us
-      </p>
+  <p>
+    Review your order before sending it to us
+  </p>
 
-    </div>
+</div>
 
-    <div id="cartItems"></div>
+<div id="cartItems"></div>
 
-    <div
-      id="cartSummary"
-      style="display:none;">
+<div
+  id="cartSummary"
+  style="display:none;">
 
-      <div class="cart-total">
-        Total: MVR
-        <span id="cartTotal">0.00</span>
-      </div>
+  <div class="cart-total">
+    Total: MVR
+    <span id="cartTotal">0.00</span>
+  </div>
 
-      <div class="order-details">
 
-        <h3>Order Details</h3>
+  <div class="order-details">
+
+    <h3>
+      Order Details
+    </h3>
+
+    <input
+      type="text"
+      id="customerName"
+      placeholder="Your name">
+
+    <input
+      type="tel"
+      id="customerPhone"
+      placeholder="Phone number">
+
+    <select
+      id="orderType"
+      onchange="toggleAddress()">
+
+      <option value="Delivery">
+        🛵 Delivery
+      </option>
+
+      <option value="Pickup">
+        🏪 Pickup
+      </option>
+
+    </select>
+
+    <textarea
+      id="customerAddress"
+      placeholder="Delivery address / location"
+      rows="3"></textarea>
+
+    <textarea
+      id="orderNotes"
+      placeholder="Extra notes (optional)"
+      rows="2"></textarea>
+
+
+    <!-- PAYMENT SECTION -->
+
+    <div class="payment-section">
+
+      <h3>
+        Payment Method
+      </h3>
+
+      <label class="payment-option">
 
         <input
-          type="text"
-          id="customerName"
-          placeholder="Your name">
+          type="radio"
+          name="paymentMethod"
+          value="Cash"
+          checked
+          onchange="togglePaymentDetails()">
+
+        <span>
+          💵 Cash
+        </span>
+
+      </label>
+
+
+      <label class="payment-option">
 
         <input
-          type="tel"
-          id="customerPhone"
-          placeholder="Phone number">
+          type="radio"
+          name="paymentMethod"
+          value="Bank Transfer"
+          onchange="togglePaymentDetails()">
 
-        <select
-          id="orderType"
-          onchange="toggleAddress()">
+        <span>
+          🏦 Bank Transfer
+        </span>
 
-          <option value="Delivery">
-            🛵 Delivery
-          </option>
-
-          <option value="Pickup">
-            🏪 Pickup
-          </option>
-
-        </select>
-
-        <textarea
-          id="customerAddress"
-          placeholder="Delivery address / location"
-          rows="3"></textarea>
-
-        <textarea
-          id="orderNotes"
-          placeholder="Extra notes (optional)"
-          rows="2"></textarea>
+      </label>
 
 
-        <!-- PAYMENT SECTION -->
+      <div
+        id="bankTransferDetails"
+        class="bank-transfer-details"
+        style="display:none;">
 
-        <div class="payment-section">
+        <strong>
+          Bank Transfer Details
+        </strong>
 
-          <h3>Payment Method</h3>
-
-          <label class="payment-option">
-
-            <input
-              type="radio"
-              name="paymentMethod"
-              value="Cash"
-              checked
-              onchange="togglePaymentDetails()">
-
-            <span>
-              💵 Cash
-            </span>
-
-          </label>
-
-
-          <label class="payment-option">
-
-            <input
-              type="radio"
-              name="paymentMethod"
-              value="Bank Transfer"
-              onchange="togglePaymentDetails()">
-
-            <span>
-              🏦 Bank Transfer
-            </span>
-
-          </label>
-
-
-          <div
-            id="bankTransferDetails"
-            class="bank-transfer-details"
-            style="display:none;">
-
-            <strong>
-              Bank Transfer Details
-            </strong>
-
-            <div>
-              🏦 <b>Bank:</b> Bank of Maldives
-            </div>
-
-            <div>
-              👤 <b>Account Name:</b> KANBULO BAKERY
-            </div>
-
-            <div>
-              🔢 <b>Account Number:</b> 7770000049905
-            </div>
-
-            <p>
-              After making the transfer, please send your
-              transfer slip through Viber or WhatsApp:
-            </p>
-
-            <div class="transfer-contacts">
-              📱 7653140 &nbsp; | &nbsp; 7359040
-            </div>
-
-          </div>
-
+        <div>
+          🏦 <b>Bank:</b> Bank of Maldives
         </div>
 
+        <div>
+          👤 <b>Account Name:</b> KANBULO BAKERY
+        </div>
 
-        <button
-          class="whatsapp-btn"
-          onclick="orderOnWhatsApp()">
-          📱 Order on WhatsApp
-        </button>
+        <div>
+          🔢 <b>Account Number:</b> 7770000049905
+        </div>
+
+        <p>
+          After making the transfer, please send your
+          transfer slip through Viber or WhatsApp:
+        </p>
+
+        <div class="transfer-contacts">
+          📱 7653140 &nbsp; | &nbsp; 7359040
+        </div>
 
       </div>
 
     </div>
+
+
+    <button
+      class="whatsapp-btn"
+      onclick="orderOnWhatsApp()">
+      📱 Order on WhatsApp
+    </button>
+
+  </div>
+
+</div>
+```
 
   </div>
 
@@ -1300,7 +1715,9 @@
 
 <footer>
 
-  <h3>KANBULO BAKERY</h3>
+  <h3>
+    KANBULO BAKERY
+  </h3>
 
   <p>
     Freshly baked with care • Thank you for supporting us
@@ -1337,13 +1754,162 @@
       localStorage.getItem("kanbuloCart") || "[]"
     );
 
-  let selectedCategory = "All";
+  let selectedCategory =
+    "All";
 
   let user = null;
 
   let isAdmin = false;
 
-  let editingProductId = null;
+  let editingProductId =
+    null;
+
+
+  /* =========================
+     ADVERTISING SLIDER
+     ========================= */
+
+  let currentAd =
+    0;
+
+  let adTimer =
+    null;
+
+
+  function showAd(index) {
+
+    const slides =
+      document.querySelectorAll(
+        ".ad-slide"
+      );
+
+    const dots =
+      document.querySelectorAll(
+        ".ad-dot"
+      );
+
+    if (!slides.length) {
+      return;
+    }
+
+    if (
+      index >= slides.length
+    ) {
+      index = 0;
+    }
+
+    if (
+      index < 0
+    ) {
+      index =
+        slides.length - 1;
+    }
+
+    currentAd =
+      index;
+
+    slides.forEach(
+      (slide, i) => {
+
+        slide.classList.toggle(
+          "active",
+          i === currentAd
+        );
+
+      }
+    );
+
+    dots.forEach(
+      (dot, i) => {
+
+        dot.classList.toggle(
+          "active",
+          i === currentAd
+        );
+
+      }
+    );
+
+  }
+
+
+  function changeAd(direction) {
+
+    showAd(
+      currentAd + direction
+    );
+
+    restartAdTimer();
+
+  }
+
+
+  function startAdTimer() {
+
+    clearInterval(
+      adTimer
+    );
+
+    adTimer =
+      setInterval(
+        () => {
+
+          showAd(
+            currentAd + 1
+          );
+
+        },
+        5000
+      );
+
+  }
+
+
+  function restartAdTimer() {
+
+    startAdTimer();
+
+  }
+
+
+  function searchJugo() {
+
+    const search =
+      document.getElementById(
+        "searchInput"
+      );
+
+    if (!search) {
+      return;
+    }
+
+    search.value =
+      "Jugo";
+
+    renderProducts();
+
+    document
+      .getElementById(
+        "productsSection"
+      )
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  function scrollToProducts() {
+
+    document
+      .getElementById(
+        "productsSection"
+      )
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
 
 
   /* =========================
@@ -1383,6 +1949,7 @@
     populateCategorySelect();
 
     renderCategoryManager();
+
   }
 
 
@@ -1405,25 +1972,28 @@
 
     `;
 
-    categories.forEach(category => {
+    categories.forEach(
+      category => {
 
-      const name =
-        category.name;
+        const name =
+          category.name;
 
-      html += `
+        html += `
 
-        <button
-          class="category-btn ${selectedCategory === name ? "active" : ""}"
-          onclick="setCategoryByName('${escapeJs(name)}', this)">
-          ${escapeHtml(name)}
-        </button>
+          <button
+            class="category-btn ${selectedCategory === name ? "active" : ""}"
+            onclick="setCategoryByName('${escapeJs(name)}', this)">
+            ${escapeHtml(name)}
+          </button>
 
-      `;
+        `;
 
-    });
+      }
+    );
 
     container.innerHTML =
       html;
+
   }
 
 
@@ -1436,6 +2006,7 @@
       category,
       button
     );
+
   }
 
 
@@ -1451,7 +2022,9 @@
     const currentValue =
       select.value;
 
-    if (categories.length === 0) {
+    if (
+      categories.length === 0
+    ) {
 
       select.innerHTML =
         `
@@ -1461,19 +2034,22 @@
         `;
 
       return;
+
     }
 
     select.innerHTML =
       categories
-        .map(category => {
+        .map(
+          category => {
 
-          return `
-            <option value="${escapeHtml(category.name)}">
-              ${escapeHtml(category.name)}
-            </option>
-          `;
+            return `
+              <option value="${escapeHtml(category.name)}">
+                ${escapeHtml(category.name)}
+              </option>
+            `;
 
-        })
+          }
+        )
         .join("");
 
     const stillExists =
@@ -1489,6 +2065,7 @@
         currentValue;
 
     }
+
   }
 
 
@@ -1503,12 +2080,16 @@
 
     if (!isAdmin) {
 
-      container.innerHTML = "";
+      container.innerHTML =
+        "";
 
       return;
+
     }
 
-    if (categories.length === 0) {
+    if (
+      categories.length === 0
+    ) {
 
       container.innerHTML =
         `
@@ -1522,38 +2103,42 @@
         `;
 
       return;
+
     }
 
     container.innerHTML =
       categories
-        .map(category => {
+        .map(
+          category => {
 
-          return `
+            return `
 
-            <div class="category-manager-item">
+              <div class="category-manager-item">
 
-              <div class="category-manager-name">
-                ${escapeHtml(category.name)}
+                <div class="category-manager-name">
+                  ${escapeHtml(category.name)}
+                </div>
+
+                <button
+                  class="rename-category-btn"
+                  onclick="renameCategory('${category.id}')">
+                  ✏️ Rename
+                </button>
+
+                <button
+                  class="delete-category-btn"
+                  onclick="deleteCategory('${category.id}')">
+                  🗑️ Delete
+                </button>
+
               </div>
 
-              <button
-                class="rename-category-btn"
-                onclick="renameCategory('${category.id}')">
-                ✏️ Rename
-              </button>
+            `;
 
-              <button
-                class="delete-category-btn"
-                onclick="deleteCategory('${category.id}')">
-                🗑️ Delete
-              </button>
-
-            </div>
-
-          `;
-
-        })
+          }
+        )
         .join("");
+
   }
 
 
@@ -1566,6 +2151,7 @@
       );
 
       return;
+
     }
 
     const input =
@@ -1585,6 +2171,7 @@
       input.focus();
 
       return;
+
     }
 
     const duplicate =
@@ -1603,6 +2190,7 @@
       input.focus();
 
       return;
+
     }
 
     const {
@@ -1624,15 +2212,18 @@
       );
 
       return;
+
     }
 
-    input.value = "";
+    input.value =
+      "";
 
     await loadCategories();
 
     alert(
       "Category added successfully."
     );
+
   }
 
 
@@ -1647,6 +2238,7 @@
       );
 
       return;
+
     }
 
     const category =
@@ -1663,6 +2255,7 @@
       );
 
       return;
+
     }
 
     const newName =
@@ -1673,7 +2266,9 @@
         category.name
       );
 
-    if (newName === null) {
+    if (
+      newName === null
+    ) {
       return;
     }
 
@@ -1687,6 +2282,7 @@
       );
 
       return;
+
     }
 
     if (
@@ -1695,6 +2291,7 @@
     ) {
 
       return;
+
     }
 
     const duplicate =
@@ -1713,6 +2310,7 @@
       );
 
       return;
+
     }
 
     const {
@@ -1721,7 +2319,8 @@
       await supabaseClient
         .from("products")
         .update({
-          category: trimmedName
+          category:
+            trimmedName
         })
         .eq(
           "category",
@@ -1740,6 +2339,7 @@
       );
 
       return;
+
     }
 
     const {
@@ -1748,7 +2348,8 @@
       await supabaseClient
         .from("categories")
         .update({
-          name: trimmedName
+          name:
+            trimmedName
         })
         .eq(
           "id",
@@ -1767,6 +2368,7 @@
       );
 
       return;
+
     }
 
     if (
@@ -1776,6 +2378,7 @@
 
       selectedCategory =
         trimmedName;
+
     }
 
     await loadCategories();
@@ -1785,6 +2388,7 @@
     alert(
       "Category renamed successfully."
     );
+
   }
 
 
@@ -1799,6 +2403,7 @@
       );
 
       return;
+
     }
 
     const category =
@@ -1815,6 +2420,7 @@
       );
 
       return;
+
     }
 
     const {
@@ -1841,6 +2447,7 @@
       );
 
       return;
+
     }
 
     if (
@@ -1858,6 +2465,7 @@
       );
 
       return;
+
     }
 
     const confirmDelete =
@@ -1892,6 +2500,7 @@
       );
 
       return;
+
     }
 
     if (
@@ -1901,6 +2510,7 @@
 
       selectedCategory =
         "All";
+
     }
 
     await loadCategories();
@@ -1910,6 +2520,7 @@
     alert(
       "Category deleted successfully."
     );
+
   }
 
 
@@ -1939,6 +2550,7 @@
       );
 
       return;
+
     }
 
     products =
@@ -1947,6 +2559,7 @@
     renderProducts();
 
     renderCart();
+
   }
 
 
@@ -1964,9 +2577,11 @@
 
     isAdmin =
       !!user &&
-      user.id === ADMIN_USER_ID;
+      user.id ===
+      ADMIN_USER_ID;
 
     updateAdminUI();
+
   }
 
 
@@ -1997,11 +2612,13 @@
 
       logoutButton.style.display =
         "none";
+
     }
 
     renderCategoryManager();
 
     renderProducts();
+
   }
 
 
@@ -2021,6 +2638,7 @@
       });
 
       return;
+
     }
 
     const box =
@@ -2033,12 +2651,17 @@
         ? "none"
         : "block";
 
-    if (box.style.display === "block") {
+    if (
+      box.style.display ===
+      "block"
+    ) {
 
       box.scrollIntoView({
         behavior: "smooth"
       });
+
     }
+
   }
 
 
@@ -2066,16 +2689,19 @@
       );
 
       return;
+
     }
 
     const {
       data,
       error
     } =
-      await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
+      await supabaseClient
+        .auth
+        .signInWithPassword({
+          email,
+          password
+        });
 
     if (error) {
 
@@ -2084,26 +2710,34 @@
       );
 
       return;
+
     }
 
     user =
       data.user;
 
     isAdmin =
-      user.id === ADMIN_USER_ID;
+      user.id ===
+      ADMIN_USER_ID;
 
     if (!isAdmin) {
 
-      await supabaseClient.auth.signOut();
+      await supabaseClient
+        .auth
+        .signOut();
 
-      user = null;
-      isAdmin = false;
+      user =
+        null;
+
+      isAdmin =
+        false;
 
       alert(
         "This account is not an admin."
       );
 
       return;
+
     }
 
     document.getElementById(
@@ -2116,18 +2750,24 @@
     alert(
       "Admin login successful."
     );
+
   }
 
 
   async function logoutAdmin() {
 
-    await supabaseClient.auth.signOut();
+    await supabaseClient
+      .auth
+      .signOut();
 
-    user = null;
+    user =
+      null;
 
-    isAdmin = false;
+    isAdmin =
+      false;
 
     updateAdminUI();
+
   }
 
 
@@ -2143,19 +2783,22 @@
       .querySelectorAll(
         ".category-btn"
       )
-      .forEach(btn => {
+      .forEach(
+        btn => {
 
-        btn.classList.remove(
-          "active"
-        );
+          btn.classList.remove(
+            "active"
+          );
 
-      });
+        }
+      );
 
     button.classList.add(
       "active"
     );
 
     renderProducts();
+
   }
 
 
@@ -2166,6 +2809,10 @@
         "products"
       );
 
+    if (!container) {
+      return;
+    }
+
     const search =
       document.getElementById(
         "searchInput"
@@ -2175,29 +2822,37 @@
       .trim();
 
     let filtered =
-      products.filter(product => {
+      products.filter(
+        product => {
 
-        const matchesCategory =
-          selectedCategory === "All" ||
-          product.category ===
-          selectedCategory;
+          const matchesCategory =
+            selectedCategory === "All" ||
+            product.category ===
+            selectedCategory;
 
-        const matchesSearch =
-          !search ||
-          (product.name || "")
-            .toLowerCase()
-            .includes(search) ||
-          (product.category || "")
-            .toLowerCase()
-            .includes(search);
+          const matchesSearch =
+            !search ||
+            (product.name || "")
+              .toLowerCase()
+              .includes(search) ||
+            (product.category || "")
+              .toLowerCase()
+              .includes(search) ||
+            (product.description || "")
+              .toLowerCase()
+              .includes(search);
 
-        return (
-          matchesCategory &&
-          matchesSearch
-        );
-      });
+          return (
+            matchesCategory &&
+            matchesSearch
+          );
 
-    if (filtered.length === 0) {
+        }
+      );
+
+    if (
+      filtered.length === 0
+    ) {
 
       container.innerHTML =
         `
@@ -2212,108 +2867,128 @@
         `;
 
       return;
+
     }
 
     container.innerHTML =
       filtered
-        .map(product => {
+        .map(
+          product => {
 
-          const availability =
-            product.available !== false;
+            const availability =
+              product.available !== false;
 
-          const image =
-            product.image_url ||
-            "https://via.placeholder.com/500x350?text=Kanbulo+Bakery";
+            const image =
+              product.image_url ||
+              "https://via.placeholder.com/500x350?text=Kanbulo+Bakery";
 
-          return `
+            return `
 
-            <div class="product-card">
+              <div class="product-card">
 
-              <div class="product-image-wrap">
+                <div class="product-image-wrap">
 
-                <img
-                  class="product-image"
-                  src="${image}"
-                  alt="${escapeHtml(product.name)}"
-                  onerror="this.src='https://via.placeholder.com/500x350?text=Kanbulo+Bakery'">
+                  <img
+                    class="product-image"
+                    src="${escapeHtml(image)}"
+                    alt="${escapeHtml(product.name)}"
+                    onerror="this.src='https://via.placeholder.com/500x350?text=Kanbulo+Bakery'">
+
+                </div>
+
+                <div class="product-info">
+
+                  <div class="product-category">
+                    ${escapeHtml(product.category || "")}
+                  </div>
+
+                  <div class="product-name">
+                    ${escapeHtml(product.name)}
+                  </div>
+
+                  ${
+                    product.description
+                      ? `
+                        <div style="
+                          color:#827775;
+                          font-family:Arial,sans-serif;
+                          font-size:11px;
+                          line-height:1.5;
+                          margin-bottom:8px;">
+                          ${escapeHtml(product.description)}
+                        </div>
+                      `
+                      : ""
+                  }
+
+                  <div class="product-price">
+                    MVR ${Number(product.price || 0).toFixed(2)}
+                  </div>
+
+                  ${
+                    availability
+                      ? `
+                        <div class="available">
+                          ✓ Available
+                        </div>
+                      `
+                      : `
+                        <div class="unavailable">
+                          ✕ Currently unavailable
+                        </div>
+                      `
+                  }
+
+                  ${
+                    availability
+                      ? `
+                        <button
+                          class="add-cart-btn"
+                          onclick="addToCart('${escapeJs(String(product.id))}')">
+                          🛒 Add to Cart
+                        </button>
+                      `
+                      : ""
+                  }
+
+                  ${
+                    isAdmin
+                      ? `
+                        <div class="admin-actions">
+
+                          <button
+                            class="edit-btn"
+                            onclick="editProduct('${escapeJs(String(product.id))}')">
+                            Edit
+                          </button>
+
+                          <button
+                            class="hide-btn"
+                            onclick="toggleAvailability('${escapeJs(String(product.id))}', ${availability})">
+                            ${availability ? "Hide" : "Show"}
+                          </button>
+
+                          <button
+                            class="delete-btn"
+                            onclick="deleteProduct('${escapeJs(String(product.id))}')">
+                            Delete
+                          </button>
+
+                        </div>
+                      `
+                      : ""
+                  }
+
+                </div>
 
               </div>
 
-              <div class="product-info">
+            `;
 
-                <div class="product-category">
-                  ${escapeHtml(product.category || "")}
-                </div>
-
-                <div class="product-name">
-                  ${escapeHtml(product.name)}
-                </div>
-
-                <div class="product-price">
-                  MVR ${Number(product.price || 0).toFixed(2)}
-                </div>
-
-                ${
-                  availability
-                    ? `
-                      <div class="available">
-                        ✓ Available
-                      </div>
-                    `
-                    : `
-                      <div class="unavailable">
-                        ✕ Currently unavailable
-                      </div>
-                    `
-                }
-
-                ${
-                  availability
-                    ? `
-                      <button
-                        class="add-cart-btn"
-                        onclick="addToCart('${product.id}')">
-                        🛒 Add to Cart
-                      </button>
-                    `
-                    : ""
-                }
-
-                ${
-                  isAdmin
-                    ? `
-                      <div class="admin-actions">
-
-                        <button
-                          class="edit-btn"
-                          onclick="editProduct('${product.id}')">
-                          Edit
-                        </button>
-
-                        <button
-                          class="hide-btn"
-                          onclick="toggleAvailability('${product.id}', ${availability})">
-                          ${availability ? "Hide" : "Show"}
-                        </button>
-
-                        <button
-                          class="delete-btn"
-                          onclick="deleteProduct('${product.id}')">
-                          Delete
-                        </button>
-
-                      </div>
-                    `
-                    : ""
-                }
-
-              </div>
-
-            </div>
-
-          `;
-        })
+          }
+        )
         .join("");
+
   }
 
 
@@ -2321,7 +2996,9 @@
      CART FUNCTIONS
      ========================= */
 
-  function addToCart(productId) {
+  function addToCart(
+    productId
+  ) {
 
     const product =
       products.find(
@@ -2337,15 +3014,19 @@
       );
 
       return;
+
     }
 
-    if (product.available === false) {
+    if (
+      product.available === false
+    ) {
 
       alert(
         "Sorry, this product is currently unavailable."
       );
 
       return;
+
     }
 
     const existing =
@@ -2357,22 +3038,27 @@
 
     if (existing) {
 
-      existing.quantity += 1;
+      existing.quantity +=
+        1;
 
     } else {
 
       cart.push({
 
-        id: product.id,
+        id:
+          product.id,
 
-        name: product.name,
+        name:
+          product.name,
 
         price:
           Number(product.price),
 
-        quantity: 1
+        quantity:
+          1
 
       });
+
     }
 
     saveCart();
@@ -2380,6 +3066,7 @@
     renderCart();
 
     scrollToCart();
+
   }
 
 
@@ -2401,7 +3088,9 @@
       Number(item.quantity) +
       Number(change);
 
-    if (item.quantity <= 0) {
+    if (
+      item.quantity <= 0
+    ) {
 
       cart =
         cart.filter(
@@ -2409,11 +3098,13 @@
             String(item.id) !==
             String(productId)
         );
+
     }
 
     saveCart();
 
     renderCart();
+
   }
 
 
@@ -2431,6 +3122,7 @@
     saveCart();
 
     renderCart();
+
   }
 
 
@@ -2440,13 +3132,17 @@
       "kanbuloCart",
       JSON.stringify(cart)
     );
+
   }
 
 
   function getCartTotal() {
 
     return cart.reduce(
-      (total, item) => {
+      (
+        total,
+        item
+      ) => {
 
         const price =
           Number(item.price) || 0;
@@ -2455,11 +3151,15 @@
           Number(item.quantity) || 0;
 
         return total +
-          (price * quantity);
+          (
+            price *
+            quantity
+          );
 
       },
       0
     );
+
   }
 
 
@@ -2487,16 +3187,23 @@
 
     const totalQuantity =
       cart.reduce(
-        (total, item) =>
+        (
+          total,
+          item
+        ) =>
           total +
-          Number(item.quantity || 0),
+          Number(
+            item.quantity || 0
+          ),
         0
       );
 
     cartCount.textContent =
       totalQuantity;
 
-    if (cart.length === 0) {
+    if (
+      cart.length === 0
+    ) {
 
       cartItems.innerHTML =
         `
@@ -2513,6 +3220,7 @@
         "none";
 
       return;
+
     }
 
     cartSummary.style.display =
@@ -2520,67 +3228,72 @@
 
     cartItems.innerHTML =
       cart
-        .map(item => {
+        .map(
+          item => {
 
-          const price =
-            Number(item.price) || 0;
+            const price =
+              Number(item.price) || 0;
 
-          const quantity =
-            Number(item.quantity) || 0;
+            const quantity =
+              Number(item.quantity) || 0;
 
-          const itemTotal =
-            price * quantity;
+            const itemTotal =
+              price *
+              quantity;
 
-          return `
+            return `
 
-            <div class="cart-item">
+              <div class="cart-item">
 
-              <div class="cart-item-info">
+                <div class="cart-item-info">
 
-                <div class="cart-item-name">
-                  ${escapeHtml(item.name)}
+                  <div class="cart-item-name">
+                    ${escapeHtml(item.name)}
+                  </div>
+
+                  <div class="cart-item-price">
+                    MVR ${price.toFixed(2)} each
+                    <br>
+                    Item total: MVR ${itemTotal.toFixed(2)}
+                  </div>
+
                 </div>
 
-                <div class="cart-item-price">
-                  MVR ${price.toFixed(2)} each
-                  <br>
-                  Item total: MVR ${itemTotal.toFixed(2)}
+                <div class="quantity-controls">
+
+                  <button
+                    onclick="changeCartQuantity('${escapeJs(String(item.id))}', -1)">
+                    −
+                  </button>
+
+                  <strong>
+                    ${quantity}
+                  </strong>
+
+                  <button
+                    onclick="changeCartQuantity('${escapeJs(String(item.id))}', 1)">
+                    +
+                  </button>
+
+                  <button
+                    class="remove-btn"
+                    onclick="removeFromCart('${escapeJs(String(item.id))}')">
+                    Remove
+                  </button>
+
                 </div>
 
               </div>
 
-              <div class="quantity-controls">
+            `;
 
-                <button
-                  onclick="changeCartQuantity('${item.id}', -1)">
-                  −
-                </button>
-
-                <strong>
-                  ${quantity}
-                </strong>
-
-                <button
-                  onclick="changeCartQuantity('${item.id}', 1)">
-                  +
-                </button>
-
-                <button
-                  class="remove-btn"
-                  onclick="removeFromCart('${item.id}')">
-                  Remove
-                </button>
-
-              </div>
-
-            </div>
-
-          `;
-        })
+          }
+        )
         .join("");
 
     cartTotal.textContent =
       getCartTotal().toFixed(2);
+
   }
 
 
@@ -2593,6 +3306,7 @@
       .scrollIntoView({
         behavior: "smooth"
       });
+
   }
 
 
@@ -2612,7 +3326,9 @@
         "customerAddress"
       );
 
-    if (orderType === "Pickup") {
+    if (
+      orderType === "Pickup"
+    ) {
 
       address.placeholder =
         "Pickup note / preferred time (optional)";
@@ -2621,7 +3337,9 @@
 
       address.placeholder =
         "Delivery address / location";
+
     }
+
   }
 
 
@@ -2637,7 +3355,10 @@
         "bankTransferDetails"
       );
 
-    if (!selected || !details) {
+    if (
+      !selected ||
+      !details
+    ) {
       return;
     }
 
@@ -2653,7 +3374,9 @@
 
       details.style.display =
         "none";
+
     }
+
   }
 
 
@@ -2667,18 +3390,22 @@
     return selected
       ? selected.value
       : "Cash";
+
   }
 
 
   function orderOnWhatsApp() {
 
-    if (cart.length === 0) {
+    if (
+      cart.length === 0
+    ) {
 
       alert(
         "Your cart is empty."
       );
 
       return;
+
     }
 
     const name =
@@ -2731,7 +3458,9 @@
       );
 
       return;
+
     }
+
 
     if (!phone) {
 
@@ -2740,7 +3469,9 @@
       );
 
       return;
+
     }
+
 
     if (
       orderType === "Delivery" &&
@@ -2752,6 +3483,7 @@
       );
 
       return;
+
     }
 
 
@@ -2789,6 +3521,7 @@
         "📍 *Location:* " +
         address +
         "\n";
+
     }
 
 
@@ -2803,6 +3536,7 @@
         "🔢 *Account number:* 7770000049905\n" +
         "📄 *Transfer slip:* Customer will send via Viber/WhatsApp\n" +
         "📱 *Slip contacts:* 7653140 / 7359040\n";
+
     }
 
 
@@ -2810,27 +3544,30 @@
       "\n*ORDER ITEMS:*\n";
 
 
-    cart.forEach(item => {
+    cart.forEach(
+      item => {
 
-      const price =
-        Number(item.price) || 0;
+        const price =
+          Number(item.price) || 0;
 
-      const quantity =
-        Number(item.quantity) || 0;
+        const quantity =
+          Number(item.quantity) || 0;
 
-      const itemTotal =
-        price * quantity;
+        const itemTotal =
+          price *
+          quantity;
 
-      message +=
-        "• " +
-        item.name +
-        " × " +
-        quantity +
-        " = MVR " +
-        itemTotal.toFixed(2) +
-        "\n";
+        message +=
+          "• " +
+          item.name +
+          " × " +
+          quantity +
+          " = MVR " +
+          itemTotal.toFixed(2) +
+          "\n";
 
-    });
+      }
+    );
 
 
     const total =
@@ -2849,6 +3586,7 @@
         "\n📝 *Notes:* " +
         notes +
         "\n";
+
     }
 
 
@@ -2869,6 +3607,7 @@
       whatsappUrl,
       "_blank"
     );
+
   }
 
 
@@ -2885,6 +3624,7 @@
       );
 
       return;
+
     }
 
     const name =
@@ -2934,6 +3674,7 @@
       );
 
       return;
+
     }
 
 
@@ -2944,6 +3685,7 @@
       );
 
       return;
+
     }
 
 
@@ -2957,10 +3699,12 @@
       );
 
       return;
+
     }
 
 
-    let imageUrl = null;
+    let imageUrl =
+      null;
 
 
     if (editingProductId) {
@@ -2973,7 +3717,9 @@
         );
 
       imageUrl =
-        existing?.image_url || null;
+        existing?.image_url ||
+        null;
+
     }
 
 
@@ -2994,12 +3740,15 @@
       } =
         await supabaseClient
           .storage
-          .from("Product-images")
+          .from(
+            "Product-images"
+          )
           .upload(
             fileName,
             imageFile,
             {
-              upsert: false
+              upsert:
+                false
             }
           );
 
@@ -3016,6 +3765,7 @@
         );
 
         return;
+
       }
 
 
@@ -3024,7 +3774,9 @@
       } =
         supabaseClient
           .storage
-          .from("Product-images")
+          .from(
+            "Product-images"
+          )
           .getPublicUrl(
             fileName
           );
@@ -3032,6 +3784,7 @@
 
       imageUrl =
         publicData.publicUrl;
+
     }
 
 
@@ -3045,7 +3798,8 @@
 
       description,
 
-      available: true,
+      available:
+        true,
 
       ...(imageUrl
         ? {
@@ -3053,16 +3807,21 @@
               imageUrl
           }
         : {})
+
     };
 
 
-    if (editingProductId) {
+    if (
+      editingProductId
+    ) {
 
       const {
         error
       } =
         await supabaseClient
-          .from("products")
+          .from(
+            "products"
+          )
           .update(
             productData
           )
@@ -3079,6 +3838,7 @@
         );
 
         return;
+
       }
 
 
@@ -3092,11 +3852,13 @@
       const {
         error
       } =
-      await supabaseClient
-        .from("products")
-        .insert(
-          productData
-        );
+        await supabaseClient
+          .from(
+            "products"
+          )
+          .insert(
+            productData
+          );
 
 
       if (error) {
@@ -3106,22 +3868,27 @@
         );
 
         return;
+
       }
 
 
       alert(
         "Product added successfully."
       );
+
     }
 
 
     cancelEdit();
 
     await loadProducts();
+
   }
 
 
-  function editProduct(productId) {
+  function editProduct(
+    productId
+  ) {
 
     if (!isAdmin) return;
 
@@ -3185,6 +3952,7 @@
     ).scrollIntoView({
       behavior: "smooth"
     });
+
   }
 
 
@@ -3230,13 +3998,17 @@
       "none";
 
 
-    if (categories.length > 0) {
+    if (
+      categories.length > 0
+    ) {
 
       document.getElementById(
         "productCategory"
       ).value =
         categories[0].name;
+
     }
+
   }
 
 
@@ -3252,6 +4024,7 @@
       );
 
       return;
+
     }
 
 
@@ -3259,7 +4032,9 @@
       error
     } =
       await supabaseClient
-        .from("products")
+        .from(
+          "products"
+        )
         .update({
           available:
             !currentlyAvailable
@@ -3277,10 +4052,12 @@
       );
 
       return;
+
     }
 
 
     await loadProducts();
+
   }
 
 
@@ -3295,6 +4072,7 @@
       );
 
       return;
+
     }
 
 
@@ -3326,7 +4104,9 @@
       error
     } =
       await supabaseClient
-        .from("products")
+        .from(
+          "products"
+        )
         .delete()
         .eq(
           "id",
@@ -3341,6 +4121,7 @@
       );
 
       return;
+
     }
 
 
@@ -3355,6 +4136,7 @@
     alert(
       "Product deleted."
     );
+
   }
 
 
@@ -3389,6 +4171,7 @@
         /'/g,
         "&#039;"
       );
+
   }
 
 
@@ -3419,6 +4202,7 @@
         /\r/g,
         "\\r"
       );
+
   }
 
 
@@ -3437,6 +4221,11 @@
     toggleAddress();
 
     togglePaymentDetails();
+
+    showAd(0);
+
+    startAdTimer();
+
   }
 
 
@@ -3464,7 +4253,9 @@
         if (isAdmin) {
 
           await loadCategories();
+
         }
+
       }
     );
 
@@ -3475,7 +4266,9 @@
 
     navigator
       .serviceWorker
-      .register("./sw.js")
+      .register(
+        "./sw.js"
+      )
       .catch(
         error =>
           console.log(
@@ -3483,9 +4276,11 @@
             error
           )
       );
+
   }
 
 </script>
 
 </body>
 </html>
+
